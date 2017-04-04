@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $(\cdot, \cdot)$ be an inner product on the real vector space $V$, and let $\| \cdot \|$ be the associated norm.
+  Show that
+  \begin{enumerate}[(a)]
+  \item $\| x + y \|^2 + \| x - y \|^2 = 2 \| x \|^2 + 2 \| y \|^2$
+  \item $\| x + y \|^2 - \| x - y \|^2 = 4 (x, y)$
+  \end{enumerate}
+  hold for all $x, y$ in $V$. The identity in part (a) is called the \emph{parallelogram law}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  Let $x, y \in V$, we have:
+  \begin{align*}
+    \| x + y \|^2 = (x + y, x + y) = (x, x) + 2 (x, y) + (y, y) \\
+    \| x - y \|^2 = (x - y, x - y) = (x, x) - 2 (x, y) + (y, y)
+  \end{align*}
+  By adding these two equalities, we get:
+  \begin{equation*}
+    \| x + y \|^2 + \| x - y \|^2 = 2 (x, x) + 2 (y, y) = 2 \| x \|^2 + 2 \| y \|^2
+  \end{equation*}
+  and by substracting the second from the first:
+  \begin{equation*}
+    \| x + y \|^2 - \| x - y \|^2 = 4 (x, y)
+  \end{equation*}
+
+\end{proof}
+
+\end{document}

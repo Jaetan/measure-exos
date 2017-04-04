@@ -1,0 +1,101 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{12}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $V$ be a Banach space, and let $v$ and $v_1, v_2, \dotsc$ belong to $V$.
+  The series $\sum_{k = 1}^{+\infty} v_k$ is said to \emph{converge unconditionally} to $v$ if for each positive $\varepsilon$
+  there is a finite subset $F_\varepsilon$ of $\mathbb{N}$ such that $\left\| \sum_{k \in F} v_k - v \right\| < \varepsilon$ holds whenever
+  $F$ is a finite subset of $\mathbb{N}$ that includes $F_\varepsilon$.
+
+  \begin{enumerate}[(a)]
+  \item \label {part_a} Show that if $\sum_{k = 0}^{+\infty} v_k$ converges absolutely, then it converges unconditionally to some point in $V$.
+  \item Show that the converse of part \ref{part_a} holds if $V = \mathbb{R}$.
+  \item Show that the converse of part \ref{part_a} is not true in general. (Hint: let $V$ be $c_0$, $l^2$, or $l^\infty$.)
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Suppose that $\sum_k v_k$ converges uniformly and note $v = \sum_{k = 0}^{+\infty} v_k$.
+    Let $\varepsilon > 0$, there exists $N \in \mathbb{N}$ such that
+    \begin{equation*}
+      \forall n \geq N,\quad m \geq N,\quad \left\| \sum_{k = n}^{m} v_k \right\| < \sum_{k = n}^m \left\| v_k \right\| < \varepsilon
+    \end{equation*}
+    Let $F_\varepsilon = \left\{ 0, 1, \dotsc, N \right\}$, and let $F_\varepsilon \subset F \subset \mathbb{N}$ for some finite $F$.
+    \begin{align*}
+      \left\| \sum_{k \in F} v_k - v \right\| &= \left\| \left( \sum_{k \in F_\varepsilon} v_k - v \right) + \sum_{k \in F - F_\varepsilon} v_k \right\| \\
+      &\leq \left\| \sum_{k = 0}^N v_k - v \right\| + \left\| \sum_{k = N + 1}^{+\infty} v_k \right\| \\
+      &\leq \left\| \sum_{k = 0}^N v_k - v \right\| + \sum_{k = N + 1}^{+\infty} \left\| v_k \right\| \\
+      &\leq 2 \varepsilon
+    \end{align*}
+    so that if $\sum_k v_k$ converges uniformly, then it converges unconditionally.
+
+  \item Let $\sum_k v_k$ be a series of real numbers that converges unconditionally to $v \in \mathbb{R}$.
+    Let $\varepsilon > 0$ and $F_\varepsilon$ a finite subset of $\mathbb{N}$ such that
+    \begin{equation*}
+      \left| \sum_{k \in F_\varepsilon} v_k - v \right| < \varepsilon
+    \end{equation*}
+    Let $n = \max F_\varepsilon$ if $F_\varepsilon \neq \varnothing$ and $n = 1$ otherwise, let $m \geq n$, and let $F^- \subset \{ n + 1, n + 2, \dotsc, m \}$
+    such that for all $i$, $n < i \leq m$, $v_i < 0$ implies $v_i \in F^-$. Then
+    \begin{align} \label{ineq:F-}
+      \sum_{k \in F^-} | v_k | &= \left| \sum_{k \in F^-} v_k \right|  \notag \\
+      &= \left| \sum_{k \in F_\varepsilon \cup F^-} v_k - \sum_{k \in F_\varepsilon} v_k \right| \notag \\
+      &\leq \left| \sum_{k \in F_\varepsilon \cup F^-} v_k - v \right| + \left| \sum_{k \in F_\varepsilon} v_k - v \right| \notag \\
+      &\leq 2 \varepsilon
+    \end{align}
+    Defining similarly $F^+$ to be the nonnegative terms of $\sum_k v_k$ with $k$ between $n + 1$ and $m$, we get
+    \begin{equation} \label{ineq:F+}
+      \sum_{k \in F^+} | v_k | \leq 2 \varepsilon
+    \end{equation}
+    Combining \eqref{ineq:F-} and \eqref{ineq:F+} we get:
+    \begin{equation*}
+      \sum_{n < k \leq m} | v_k | \leq 4 \varepsilon
+    \end{equation*}
+    The above inequality is valid for any value of $m$, as soon as $n \geq \max F_\varepsilon$, so that $\sum_k | v_k |$ is a Cauchy series of real numbers.
+    Since $\mathbb{R}$ is complete, we deduce that $\sum_k | v_k |$ converges in $\mathbb{R}$, so that $\sum_k v_k$ is absolutely convergent.
+
+  \item Let $V = c_0$, the $\mathbb{R}$-vector space of real number sequences $\{ x_n \}$ such that $\lim_n x_n = 0$, equipped with the norm $\| \cdot \|_\infty$.
+    Define a sequence $\{ v_n \}$ of elements of $c_0$, noted $v_n = (v_{n, 0}, v_{n, 0}, \cdots)$ such that
+    \begin{equation*}
+      \forall k \in \mathbb{N}, \; v_{n, k} = \begin{cases}
+        \frac{1}{n + 1} &\quad\text{ if } k = n \\
+        0 &\quad\text{ otherwise }
+      \end{cases}
+    \end{equation*}
+    Then, for all $n \in \mathbb{N}$, $\| v_n \| = 1 / (n + 1)$, so that $\sum_n v_n$ is not absolutely convergent.
+    Let
+    \begin{equation*}
+      v = \left( 1, \frac{1}{2}, \frac{1}{3}, \dotsc, \frac{1}{n}, \dotsc \right)
+    \end{equation*}
+    For all $N \in \mathbb{N}$,
+    \begin{equation*}
+      \left\| \sum_{k = 0}^N v_k - v \right\| = \left\| \left( 0, 0, \dotsc, \frac{1}{N + 2}, \frac{1}{N + 3}, \dotsc \right) \right\| = \frac{1}{N + 2}
+    \end{equation*}
+    Let $\varepsilon > 0$ and choose $N$ such that $1 / (N + 2) < \varepsilon$. Let $F_\varepsilon = \{ 0, 1, 2, \dotsc, N \}$, and let $F$
+    be any subset of $\mathbb{N}$ that contains $F_\varepsilon$. Then
+    \begin{equation*}
+      \left\| \sum_{k \in F} v_k - v \right\| \leq \frac{1}{N + 2} < \varepsilon
+    \end{equation*}
+    so $\sum_k v_k$ converges unconditionally to $v$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

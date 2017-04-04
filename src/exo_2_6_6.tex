@@ -1,0 +1,162 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+Let $\mu$ be a nonzero finite Borel measure on $\mathbb{R}$, and let
+$F:\mathbb{R}\to\mathbb{R}$ be the function defined by
+$F(x)=\mu\left(\left(-\infty,x\right.]\right)$. Define a function $g$ on the interval
+$\left(0,\lim_{x\to+\infty}F\left(x\right)\right)$ by
+  \begin{equation*}
+    g(x)=\inf\left\{t\in\mathbb{R}:F\left(t\right)\geq x\right\}.
+  \end{equation*}
+  \begin{enumerate}
+  \item Show that $g$ is nondecreasing, finite valued, and Borel
+    measurable.
+  \item Show that $\mu=\lambda g^{-1}$. (Hint: start by showing that
+    $\mu(B)=\lambda\left(g^{-1}\left(B\right)\right)$ when $B$ has the form $(-\infty,b]$.)
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}\hfill
+  \begin{enumerate}
+  \item
+    $g$ is non-decreasing: let $0<x<y<\lim_{+\infty} F$,
+    we have for all $t$ in $\mathbb{R}$ $F(t)\geq y \implies F(t)\geq
+    x$, so $\left\{ t\in\mathbb{R} \mid F(t)\geq y\right\} \subset
+    \left\{ t\in\mathbb{R} \mid F(t)\geq x\right\}$. As $g(x)$ and $g(y)$
+    are the infimums of these sets, $g(x)\leq g(y)$.
+
+    $g$ is finite-valued: $F$ is non-negative, non-decreasing,
+    right-continuous, and $\lim_{-\infty}F = 0$ (Proposition
+    1.3.9). Further, $\mu$ being finite, $F$ is bounded and
+    $\lim_{+\infty}F = \mu(\mathbb{R})$. Let $x$ be in
+    $\left(0,\mu\left(\mathbb{R}\right)\right)$, there exists $t_0$ in
+    $\mathbb{R}$ such that $F(t_0)\geq x$ (since $\mu(\mathbb{R}) =
+    \lim_{+\infty}F$ and $\mu$ is non-zero), so $\left\{
+    t\in\mathbb{R} \mid F(t)\geq x \right\}$ is non empty. Also, there
+    exists $t_1$ in $\mathbb{R}$ such that $0\leq F(t_1)\leq x$ (since
+    $0 = \lim_{-\infty}F$), so $\left\{ t\in\mathbb{R} \mid F(t)\geq x
+    \right\}$ has a lower bound in $\mathbb{R}$, and therefore an
+    infimum in $\mathbb{R}$, so $g(x)$ is finite for all $x$ in $(0,
+    \mu(\mathbb{R}))$.
+
+    $g$ is Borel-measurable: as $g$ is non-decreasing on the interval
+    $(0, \mu(\mathbb{R}))$, it is Borel-measurable on this interval.
+
+  \item
+
+    Let $(F_n)$ be a non-decreasing series of non-negative,
+    non-decreasing, right-continuous simple functions such that for
+    all $x\in\mathbb{R}$, $\lim_{n \to \infty} F_n (x) = F (x)$. For
+    each $n$, define on $(0, \lim_{+\infty} F_n)$ a function $g_n$ by
+    $g_n (x) = \inf \{ t \in \mathbb{R} \mid F_n (t) \geq x \}$. Each
+    $F_n$ has the same properties as $F$, which implies that each
+    $g_n$ has the same properties as $g$ (listed in the preceding
+    point).
+
+    Further, since the $F_n$ are right-continuous and non-decreasing,
+    for each $x \in \mathbb{R}$, $\{ t \in \mathbb{R} \mid F_n (t) = x
+    \}$ is an interval. This allows us to write $F_n (x) = \sum_{i =
+      0}^{K_n} F_n (a_i) \chi_{[a_i, a_{i + 1})}$.
+
+    From the above, we deduce that on each interval $[F (a_i), F (a_{i
+        + 1}))$, $g_n$ is constant, equal to $a_i$.
+
+    Let $b \in \mathbb{R}$, we write, for the biggest $i$ such that
+    $F_n (a_i) \leq F_n (b)$:
+
+    \begin{align*}
+      F_n (b) = & \big( F_n (b) - F_n (a_i) \big) + \big( F_n (a_i) - F_n
+      (a_{i - 1}) \big)\\
+      & + \cdots + \big( F_n (a_1) - F_n (a_0) \big) + \big( F_n (a_0) - 0 \big)\\
+      F_n (b) = & \big( F_n (b) - F_n (a_i) \big) + \lambda \big( \{ x
+      \in \mathbb{R} \mid g_n (x) = a_i \} \big)\\
+        & + \cdots + \lambda \big( \{ x \in \mathbb{R} \mid g_n (x) = a_0 \} \big) + ( F
+          (a_0) - 0 )
+    \end{align*}
+
+    Let $\epsilon > 0$. Since $F_n$ is simple, there exists $k$ such
+    that $0 \leq k \leq K_n$ and $F_n (b) = F_n (a_k)$. And since
+    $lim_{-\infty} F = 0$, we can choose $n$ such that $0 \leq F_n
+    (a_0) < \epsilon$. By convergence of $\big( F_n (b) \big)$ to $F
+    (b)$, we can, by increasing $n$ as necessary, also have $\big| F_n
+    (b) - F (b) \big| < \epsilon$. Combining the above, we get
+
+    \[
+    \left| F (b) - \sum_{i = 0}^k \lambda \big( \{ x \in \mathbb{R}
+    \mid g_n (x) = a_i \} ) \big) \right| \leq 2\epsilon
+    \]
+
+    Noting that $g_n$ only takes the discrete values $a_i$, the above
+    inequality can be rewritten as
+
+    \[
+    \left| F (b) - \lambda \left( g_n^{-1} \left( -\infty, b \right.]
+    \right) \right| \leq 2\epsilon
+    \]
+
+    Since the $g_n$ are non-decreasing, for each $n \in \mathbb{N}$
+    and each $x \in (0, lim_{+\infty} F_n)$, $g_{n+1} (x) \leq b
+    \implies g_n (x) \leq b$, from which we get $g_{n+1}^{-1}
+    (-\infty, b] \subset g_n^{-1} (-\infty, b] \subset g_0^{-1}
+    (-\infty, b] \subset (0, lim_{+\infty} F)$, and this limit is a
+    finite real number. From the above, we conclude that
+
+    \[
+    \underset{n \to +\infty}{\lim} \lambda \big( g_n^{-1} (-\infty, b] \big) =
+      \lambda \left( \bigcap_{n = 0}^{+\infty} g_n^{-1} (-\infty, b] \right)
+    \]
+
+    With our previous notation $F_n (b) = F_n (a_k)$, the simplicity
+    of $F_n$ implies that $a_k = g_n \big( F_n (b) \big)$. Note that
+    for $n$ fixed in $\mathbb{N}$, $\left( g_k \circ F_n (b)
+    \right)_{k \geq n}$ is a non-decreasing sequence converging to $g
+    \big( F_n (b) \big)$ (since $F_n (b)$ is in the domain of every
+    $g_n$ and the $g_n (x)$ are non-decreasing, simply converging to
+    $g (x)$). $\big( g \circ F_n (b) \big)_{n \in \mathbb{N}}$ is also
+    a non-decreasing sequence, converging to $g \big( F (b-) \big)$.
+
+    Note that $g ( F (b-) ) \leq b$, since $F (b-) \leq F (b)$. If $F$
+    is left-continuous at $b$, then $g ( F (b-) ) = g ( F (b) ) =
+    b$. Otherwise, let us take $x_0$ such that $F (b-) < x_0 < F
+    (b)$. By definition of $g$, we have $g (x_0) = b$. However, $g$ is
+    right-continuous at every point in its domain, so $g ( F (b-) ) =
+    g (x_0) = b$. This allows us to deduce that
+
+    \[
+    \bigcap_{n \in \mathbb{N}} g_n^{-1} (-\infty, b] = g^{-1}
+      (-\infty, b]
+    \]
+
+    from which we conclude that $\mu (-\infty, b] = \lambda \big(
+    g^{-1} (-\infty, b] \big)$
+
+    Finally, we note that for any Borel set $B$,
+
+    \[
+    \lambda ( g^{-1} B ) = \int_\mathbb{R} \chi_{g^{-1} B} \,\mathrm{d}\lambda
+    = \int_\mathbb{R} \chi_B \circ g \,\mathrm{d}\lambda = \int_B
+    \,\mathrm{d} (\lambda g^{-1})
+    = \lambda g^{-1} (B)
+    \]
+
+    Thus the measures $\mu$ and $\lambda g^{-1}$ agree on the open
+    sets $(-\infty, b]$ for any $b \in \mathbb{R}$. Therefore they
+    agree on the $\sigma$-algebra generated by these open sets, which
+    is the Borel $\sigma$-algebra. $\mu$ and $\lambda g^{-1}$ are
+    therefore equal on $\mathscr{B} ( \mathbb{R} )$.
+
+  \end{enumerate}
+\end{proof}
+
+\end{document}

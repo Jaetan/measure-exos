@@ -1,0 +1,38 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+  Suppose that $(X, \mathscr{A}, \mu)$ is a measure space and that $f$ and $f_1, f_2, \ldots$ belong to
+  $\mathscr{L}^1 (X, \mathscr{A}, \mu, \mathbb{R})$. Show that if $\{ f_n \}$ converges to $f$ in mean so fast that
+  \[
+  \sum_n \int | f_n - f | \,\mathrm{d}\mu < +\infty
+  \]
+  then $\{ f_n \}$ converges to $f$ almost everywhere.
+\end{exercise}
+
+\begin{proof}
+  Let $\epsilon > 0$, $N = \{ x \in X \mid f_n (x)$ does not converge to $f (x) \}$, and $A_k = \{ x \in X \mid | f_k (x) - f (x) | > \epsilon \}$.
+  We have $N \subset \cap_{n = 1}^{\infty} \cup_{k = n}^\infty A_k$, so that
+  \begin{align*}
+    0 \leq \mu (N) &\leq \mu \left( \bigcap_{n = 1}^\infty \bigcup_{k = n}^\infty A_k \right)\\
+    &\leq \mu \left( \bigcup_{k = n}^\infty A_k \right) \qquad\text{for any value of $n$}\\
+    &\leq \sum_{k = n}^\infty \mu \left( A_k \right)\\
+    &\leq \frac{1}{\epsilon} \sum_{k = n}^\infty \int | f_k - f | \,\mathrm{d}\mu \qquad\text{ by 2.3.14}\\
+  \end{align*}
+  The last term being the rest of a converging sum, we can choose $n$  large enough so that $\sum_{k = n}^\infty \int | f_k - f | \,\mathrm{d}\mu < \epsilon^2$,
+  which leads to $0 \leq \mu (N) \leq \epsilon$. From this we deduce that $\{ f_n \}$ converges to $f$ almost everywhere.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+  Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $A$ and $A_1, A_2, \ldots$ belong to $\mathscr{A}$. Show that
+  \begin{enumerate}[(a)]
+  \item
+    $\{ \chi_{A_n} \}$ converges to 0 in measure if and only if $\lim_n \mu (A_n) = 0$.
+
+  \item
+    $\{ \chi_{A_n} \}$ converges to 0 almost everywhere if and only if $\mu (\cap_{n = 1}^\infty \cup_{k = n}^\infty A_k) = 0$
+
+  \item
+    $\{ \chi_{A_n} \}$ converges to $\chi_A$ almost everywhere if and only if the three sets $A$, $\cap_{n = 1}^\infty \cup_{k = n}^\infty A_k$ and $\cup_{n = 1}^\infty \cap_{k = n}^\infty A_k$
+    differ only by $\mu$-null sets (Hint: see exercise 2.1.1)
+
+    For reference, exercise 2.1.1 state that for $(A_k)$ a sequence of subsets of $X$, and $B = \cup_{n = 1}^\infty \cap_{k = n}^\infty A_k$ and $C = \cap_{n = 1}^\infty \cup_{k = n}^\infty A_k$,
+    we have $\lim\inf_k \chi_{A_k} = B$ and $\lim\sup_k \chi_{A_k} = C$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}\hfill
+  \begin{enumerate}[(a)]
+  \item
+    Let $\epsilon > 0$, we have $\{ x \in X \mid | \chi_{A_n} (x) | > \epsilon \} = \{ x \in X \mid \chi_{A_n} (x) = 1 \} = A_n$, from which we deduce
+    $\mu \big( \{ x \in X \mid | \chi_{A_n} (x) | > \epsilon \} \big) = \mu (A_n)$. So $\{ \chi_{A_n} \}$ converges in measure to 0 is equivalent to $\mu (A_n)$ converges to 0.
+
+  \item
+    Let $\epsilon > 0$ and $n \in \mathbb{N}$. As before, we note that $A_n = \{ x \in X \mid | \chi_{A_n} (x) | > \epsilon \}$.
+    Define $B_n = \cup_{k = n}^\infty A_k$ and $B = \cap_{n = 1}^\infty B_n$, and remark that $\{ x \in X \mid \{ \chi_{A_n} (x) \}$ does not converge to 0 $\}$ is a subset of $B$.
+    Therefore if $\mu (\cap_{n = 1}^\infty \cup_{k = n}^\infty A_k) = 0$, then $\{ \chi_{A_n} \}$ converges to 0 almost everywhere.
+
+    Conversely, suppose that $\{ \chi_{A_n} \}$ converges to 0 almost everywhere, and choose a $\mu$-null set $N \subset \mathscr{A}$
+    such that $\{ x \in X \mid \{ \chi_{A_n} \}$ does not converge to 0 $\} \subset N$. Define $D_n = A_n \cap N^C$; the series $(\chi_{D_n})$ converges simply to 0 everywhere.
+    Let $D = \cap_{n = 1}^\infty \cup_{k = n}^\infty D_k$ and $x \in D$. Then for all $n$, $\exists k \geq n,\quad \chi_{D_n} (x) = 1$,
+    which contradicts the simple convergence of $(\chi_{D_n})$ to 0 on $N^C$. It follows that $D = \varnothing$, and thus $\mu (D) = 0$.
+
+    Next, define $S = \cap_{n = 1}^\infty \cup_{k = n}^\infty A_k$. We have:
+    \begin{align*}
+    \mu (S) &= \mu (S \cap N) + \mu (S \cap N^C)\\
+    \mu (S \cap N) &\leq \mu (N) = 0\\
+    \mu (S \cap N^C) &= \mu \left( \cap_{n = 1}^\infty \cup_{k = n}^\infty \left( A_k \cap N^C \right) \right) = \mu (D) = 0\\
+    \end{align*}
+    which gives us $\mu (\cap_{n = 1}^\infty \cup_{k = n}^\infty A_k) = 0$
+
+  \item
+    
+
+  \end{enumerate}
+\end{proof}
+
+\end{document}

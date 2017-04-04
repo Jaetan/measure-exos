@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+  Let $\mu$ be a measure on $(X, \mathscr{A})$, and et $f, f_1, f_2, \dotsc$ and $g, g_1, g_2, \dotsc$ be real-valued
+  $\mathscr{A}$-measurable functions on $X$.
+  \begin{enumerate}[(a)]
+  \item Show that if $\mu$ is finite, if $\{ f_n \}$ converges to $f$ in measure, and if $\{ g_n \}$ converges to $g$ in measure,
+    then $\{ f_n g_n \}$ converges to $fg$ in measure.
+  \item Can the assumption that $\mu$ is finite be omitted in part (a)?
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item First, note that $\forall x \in \mathbb{R}$,
+  \begin{multline*}
+    f_n (x) g_n (x) - f (x) g (x) = \big( f_n (x) - f (x) \big) \big( g_n (x) - g (x) \big) \\
+    + f (x) \big( g_n (x) - g (x) \big) + g (x) \big( f_n (x) - f (x) \big)
+  \end{multline*}
+
+  Let $\alpha > 0$. For all positive reals $0 < \alpha_1 < \alpha_2 < \alpha_3$ such that $\alpha = \alpha_1 + \alpha_2 + \alpha_3$,
+  we have $\alpha_3 \geq \alpha / 3$ (otherwise their sum would be less than $\alpha$). From this we deduce that:
+  \begin{multline}\label{eq:inclusion}
+      \big\{ x \in X \mid | f_n (x) g_n (x) - f (x) g (x) | > 3 \alpha \big\} \subset \\
+      \big\{ x \in X \mid | f_n (x) - f (x) | | g_n (x) - g (x) | > \alpha \big\} \\
+      \cup \big\{ x \in X \mid | f (x) | | g_n (x) - g (x) | > \alpha \big\} \\
+      \cup \big\{ x \in X \mid | g (x) | | f_n (x) - f (x) | > \alpha \big\}
+  \end{multline}
+
+  Now let $n \in \mathbb{N}$. Define $F_n = \{ x \in X \mid | f (x) | > n \}$ and $G_n = \{ x \in X \mid | g (x) | > n \}$.
+  Since $\mu$ is finite, $\mu ( F_n )$ is finite, and we also have
+  $F_{n + 1} \subset F_n$. Since $f$ is real-valued, we deduce:
+  \begin{equation*}
+    \mu \left( \bigcap_{n = 0}^\infty F_n \right) = \lim_{n \to \infty} \mu (F_n) = 0
+  \end{equation*}
+  The same holds for $g$ and $G_n$.
+
+  Let $\epsilon > 0$. Choose $N \in \mathbb{N}$ such that $\mu ( F_n ) < \epsilon$ and $\mu ( G_n ) < \epsilon$ for all $n \geq N$.
+
+  Note that
+  \begin{multline*}
+    \big\{ x \in X \mid | f (x) | \leq N \big\} \cap \big\{ x \in X \mid | g_n (x) - g (x) | \leq \alpha / N \big\} \\
+    \subset \big\{ x \in X \mid | f (x) | | g_n (x) - g (x) | \leq \alpha \big\}
+  \end{multline*}
+  Taking the complement in $X$, we get
+  \begin{multline*}
+    \big\{ x \in X \mid | f (x) | | g_n (x) - g (x) | > \alpha \big\} \\
+    \subset F_n \cup \big\{ x \in X \mid | g_n (x) - g (x) | > \alpha / N \big\}
+  \end{multline*}
+  which implies
+  \begin{multline*}
+    \mu \left( \big\{ x \in X \mid | f (x) | | g_n (x) - g (x) | > \alpha \big\} \right) \\
+    \leq \mu (F_n) + \mu \left( \big\{ x \in X \mid | g_n (x) - g (x) | > \alpha / N \big\} \right)
+  \end{multline*}
+
+  Similarly, we have
+  \begin{multline*}
+    \mu \left( \big\{ x \in X \mid | g (x) | | f_n (x) - f (x) | > \alpha \big\} \right) \\
+    \leq \mu (G_n) + \mu \left( \big\{ x \in X \mid | f_n (x) - f (x) | > \alpha / N \big\} \right)
+  \end{multline*}
+
+  Finally, we also have
+  \begin{multline*}
+    \big\{ x \in X \mid | f_n (x) - f (x) | \leq \sqrt{\alpha} \big\} \cap \big\{ x \in X \mid | g_n (x) - g (x) | \leq \sqrt{\alpha} \big\} \\
+    \subset \big\{ x \in X \mid | f_n (x) - f (x) | | g_n (x) - g (x) | \leq \alpha \big\}
+  \end{multline*}
+  which implies
+  \begin{multline*}
+    \mu \left( \big\{ x \in X \mid | f_n (x) - f (x) | | g_n (x) - g (x) | > \alpha \big\} \right) \\
+    \leq \mu \left( \big\{ x \in X \mid | f_n (x) - f (x) | > \sqrt{\alpha} \big\} \right) \\
+    + \mu \left( \big\{ x \in X \mid | g_n (x) - g (x) | > \sqrt{\alpha} \big\} \right)
+  \end{multline*}
+
+  Summarizing the results above, we get:
+  \begin{equation*}
+    \begin{split}
+    \mu & \left( \big\{ x \in X \mid | f_n (x) g_n (x) - f (x) g (x) | > 3 \alpha \big\} \right) \\
+    &\leq \mu \left( \big\{ x \in X \mid | f_n (x) - f (x) | > \sqrt{\alpha} \big\} \right) \\
+    &\quad{}+ \mu \left( \big\{ x \in X \mid | g_n (x) - g (x) | > \sqrt{\alpha} \big\} \right) \\
+    &\quad{}+ \mu (F_n) + \mu \left( \big\{ x \in X \mid | g_n (x) - g (x) | > \alpha / N \big\} \right) \\
+    &\quad{}+ \mu (G_n) + \mu \left( \big\{ x \in X \mid | f_n (x) - f (x) | > \alpha / N \big\} \right)
+    \end{split}
+  \end{equation*}
+
+  The convergence of $\{ f_n \}$ (resp. $\{ g_n \}$) to $f$ (resp. $g$) in measure allows us to choose $M \in \mathbb{N}$ greater than $N$ and such that
+  the 4 measures above involving $| f_n - f |$ and $| g_n - g |$ are simultaneously less than $\epsilon$ when $n \geq M$. From this we deduce that $\{ f_n g_n \}$
+  converges to $f g$ in measure.
+
+  \item The hypothesis that $\mu$ is finite is necessary. Consider for example for $x > 0$, $f_n (x) = \exp (x)$ and $g_n (x) = \frac{1}{x} + \frac{1}{n}$ for $n \geq 1$.
+    We have $| g_n (x) - \frac{1}{x} | = \frac{1}{n}$; then $\{ g_n \}$ converges uniformly to $x \mapsto \frac{1}{x}$, and therefore converges also in measure.
+    \begin{align*}
+      f_n (x) g_n (x) - f (x) g (x) &= \exp (x) \left( \frac{1}{x} + \frac{1}{n} \right) - \frac{\exp (x)}{x} \\
+      &= \frac{1}{n} \exp (x)
+    \end{align*}
+    Let $\epsilon > 0$, $\{ x > 0 \mid \frac{1}{n} \exp (x) > \epsilon \} = {[\ln (n \epsilon), +\infty)}$, whose Lebesgue measure is always $+\infty$,
+      so $\{ f_n g_n \}$ does not converge in measure to $f g$.\qedhere
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

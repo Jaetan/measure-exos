@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $(X, \mathscr{A}, \mu)$ be a finite measure space, and let $f$ be an $\mathscr{A}$-measurable
+  real- or complex-valued function on $X$.
+
+  \begin{enumerate}[(a)]
+
+  \item \label{point:a} Show that $f$ belongs to $\mathscr{L}^\infty (X, \mathscr{A}, \mu)$ if and only if:
+
+    \begin{enumerate}[(i)]
+
+    \item \label{it:i} $f$ belongs to $\mathscr{L}^p (X, \mathscr{A}, \mu)$ for each $p$ in $[1, {+\infty})$ and
+    \item \label{it:ii} $\sup \{ \| f \|_p : 1 \leq p < +\infty \}$ is finite.
+
+    \end{enumerate}
+
+  \item Show that if these conditions hold, then $\| f \|_\infty = \lim_{p \to +\infty} \| f \|_p$.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}
+
+  A function $f : X \to \mathbb{R}$ can verify $\sup \{ \| f \|_p, 1 \leq p < +\infty \} < +\infty$ without being bounded:
+  for example, let $X = \mathbb{R}$, $\mathscr{A} = \mathscr{B} (\mathbb{R})$, $\mu$ be the point mass $\mu (A) = 1 \iff 0 \in A$,
+  and
+  \begin{align*}
+    f : \mathbb{R} &\to \mathbb{R} \\
+    x &\mapsto \begin{cases}
+      n &\text { if } x = 1 / n \text{ for } n \in \mathbb{N}_+ \\
+      0 &\text{ otherwise }
+    \end{cases}
+  \end{align*}
+  Then $f$ is measurable, and $\int_\mathbb{R} | f |^p \,\mathrm{d}\mu = 0$ for all $p \in [1, +\infty )$.
+    However, $f (1 / n) = n$ for all $n \in \mathbb{N}$ so $f$ is not bounded.
+
+    Therefore, for this exercise, we take $\mathscr{L}^\infty (X, \mathscr{A}, \mu, \mathbb{R})$ to be the $\mathbb{R}$-vector space
+    of $\mathscr{A}$-measurable functions $X \to \mathbb{R}$ that are essentially bounded; and, replacing $\mathbb{R}$ with $\mathbb{C}$ in the previous sentence,
+    we define $\mathscr{L}^\infty (X, \mathscr{A}, \mu, \mathbb{C})$.
+
+  \begin{enumerate}[(a)]
+
+  \item Let $f \in \mathscr{L}^\infty (X, \mathscr{A}, \mu)$. For all $p \in [1, +\infty)$, $f^p$ is $\mathscr{A}$-measurable
+    as the composition of $\mathscr{A}$-measurable functions on their respective domains; and $f^p$ is essentially bounded.
+    Let $N$ be a locally $\mu$-null set where $f^p$ is not bounded. Since $\mu (X)$ is finite, we have $\mu (N \cap X) = \mu (N) = 0$.
+    From this we deduce that
+    \begin{equation*}
+      \int_X | f |^p \,\mathrm{d}\mu = \int_{X - N} | f |^p \,\mathrm{d}\mu
+    \end{equation*}
+    and, since $f^p$ is bounded on $X - N$, this integral is finite. Therefore $f \in \mathscr{L}^p (X, \mathscr{A}, \mu)$ for all $1 \leq p < +\infty$.
+
+    The set $M = \{ x \in X \mid | f (x) | > \| f \|_\infty \}$ is locally $\mu$-null since $f \in \mathscr{L}^\infty (X, \mathscr{A}, \mu)$.
+    Since $\mu (X)$ is finite, $\mu (M) = 0$, and
+    \begin{align*}
+      \int_X | f |^p \,\mathrm{d}\mu &= \int_{X - M} | f |^p \,\mathrm{d}\mu \leq \| f \|_\infty^p \cdot \mu (X) &\text{ so that } \\
+      \| f \|_p &\leq \| f \|_\infty \cdot \mu (X)^{1 / p}
+    \end{align*}
+
+    \begin{itemize}
+
+      \item If $\mu (X) = 1$, then we get $\| f \|_p \leq \| f \|_\infty$
+
+      \item If $\mu (X) > 1$, the function $p \mapsto \mu (X)^{1 / p}$ is nonnegative and nonincreasing; we get $\| f \|_p \leq \| f \|_\infty \cdot \mu (X)$
+
+      \item If $\mu (X) < 1$, the function $p \mapsto \mu (X)^{1 / p}$ is nonnegative and nondecreasing; we get $\| f \|_p \leq \| f \|_\infty$
+
+    \end{itemize}
+
+    Therefore, P = $\{ \| f \|_p, 1 \leq p < \infty \}$ is a nonempty subset of $\mathbb{R}$ that is bounded above,
+    so $\sup P$ exists and is finite.
+
+    Conversely, suppose that $f$ verifies \ref{it:i} and \ref{it:ii}, and suppose that $f$ is not essentially bounded.
+    Let $M > \sup P$, there exists $N = \{ x \in X \mid | f | > M \}$ such that $\mu (N) > 0$. Then
+    \begin{align*}
+      \int_X | f |^p \,\mathrm{d}\mu &\geq M^p \cdot \mu (N) \\
+      \| f \|_p &> \sup P \cdot \mu (N)^{1 / p} \\
+      \sup P &> \sup P \cdot \mu (N)^{1 / p}
+    \end{align*}
+    This last inequality holds for any value of $p \in [1, +\infty)$. Using a disjunction of the cases $\mu (N) < 1$, $\mu (N) = 1$,
+    and $\mu (N) > 1$, we always arrive at $\sup P > \sup P$, which is impossible. Therefore $f$ is essentially bounded.
+
+  \item Let $f \in \mathscr{L}^\infty ( X, \mathscr{A}, \mu )$. Since $\mu (X)$ is finite, $f$ is bounded almost everywhere; let $N$
+    be a $\mu$-null set where $f$ is not bounded. There exists $\{ f_n \}_{n \in \mathbb{N}}$ a nondecreasing sequence of simple functions
+    converging simply to $f$ on $X - N$. For all $n$, $f_n$ is bounded. Let us note
+    \begin{align*}
+      f_n (x) = \sum_{i = 0}^k a_{i} \chi_{A_i} (x) &\text{ with } | a_1 | > | a_2 | > \dotsb > | a_k |
+    \end{align*}
+    Then, for all $p \in [1, {+\infty})$, we deduce from \ref{point:a} that $f_n^p$ is integrable, and, since the $A_i$ are pairwise disjoint, we get
+    \begin{equation*}
+      \int_X | f_n |^p \,\mathrm{d}\mu = \int_X \sum_{i = 0}^k | a_i |^p \chi_{A_i} \,\mathrm{d}\mu
+    \end{equation*}
+    From this we deduce
+    \begin{align*}
+      \int_X | a_1 |^p \chi_{A_1} \,\mathrm{d}\mu &\leq& \int_X | f_n |^p \,\mathrm{d}\mu &\leq& \int_X | a_1 |^p \chi_X \,\mathrm{d}\mu \\
+      | a_1 |^p \mu ( A_1 ) &\leq& \int_X | f_n |^p \,\mathrm{d}\mu &\leq& | a_1 |^p \mu (X)
+    \end{align*}
+    Since for all $x > 0$ $\lim_{p \to +\infty} x^{1 / p} = 1$, we deduce that
+    \begin{equation} \label{eq:fn_p_fn_infty}
+      \lim_{p \to +\infty} \| f_n \|_p = | a_1 | = \| f_n \|_\infty
+    \end{equation}
+    The sequence $\{ \| f_n \|_\infty \}_{n \in \mathbb{N}}$ of real numbers is nondecreasing and bounded above by $\| f \|_\infty$, and therefore converges
+    to $\lambda$ such that $0 \leq \lambda \leq \| f \|_\infty$. Let $\varepsilon > 0$, and suppose that $\lambda < \| f \|_\infty - \varepsilon$.
+    Since $f$ is bounded on $X - N$, there exists $x \in X - N$ such that $\big| f (x) - \| f \|_\infty \big| < \varepsilon / 3$.
+    By convergence of $\{ f_n (x) \}$ to $f (x)$, there exists $M \in \mathbb{N}$ such that $| f_n (x) - f (x) | < \varepsilon / 3$ for all $n > M$.
+    Then, for $n > M$, we have $\big| f_n (x) - \| f \|_\infty \big| < 2 \varepsilon / 3$. Taking the limit as $n$ reaches $+\infty$, we get
+    $\varepsilon < \big| \lambda - \| f \|_\infty \big| \leq 2 \varepsilon / 3$, which is a contradiction. Therefore
+    \begin{equation} \label{eq:fn_infty_f_infty}
+      \lim_{n \to +\infty} \| f_n \|_\infty = \| f \|_\infty
+    \end{equation}
+
+    Last, we have $\big| \| f_n \|_p - \| f \|_p \big| \leq \| f_n - f \|_p$. Since $f_n \leq f$ and $f$ is bounded, the dominated convergence theorem
+    allows us to conclude that
+    \begin{equation} \label{eq:fn_to_f_pnorm}
+      \lim_{n \to +\infty} \| f_n - f \|_p = 0
+    \end{equation}
+    For all $n$ and all $p$, the following inequality stands:
+    \begin{align*}
+      \big| \| f \|_p - \| f \|_\infty \big| &\leq \big| \| f \|_p - \| f_n \|_p \big| \\
+      &\quad + \big| \| f_n \|_p - \| f_n \|_\infty \big| \\
+      &\quad + \big| \| f_n \|_\infty - \| f \|_\infty \big|
+    \end{align*}
+
+    Let $\varepsilon > 0$.
+    From \eqref{eq:fn_infty_f_infty}, there exists $N_1 \in \mathbb{N}$ such that $\big| \| f_{N_1} \|_\infty - \| f \|_\infty \big| < \varepsilon$.
+    From \eqref{eq:fn_p_fn_infty}, there exists $P_1 \in \mathbb{N}$ such that $\big| \| f_{N_1} \|_p - \| f_{N_1} \|_\infty \big| < \varepsilon$ for all $p \geq P_1$.
+    From \eqref{eq:fn_to_f_pnorm}, there exists $P_2 \in \mathbb{N}$ such that $\big| \| f \|_p - \| f_{N_1} \|_p \big| < \varepsilon$ for all $p \geq P_2$.
+    Therefore, for all $p \geq \max ( P_1, P_2 )$, we have
+    \begin{equation*}
+      \big| \| f \|_p - \| f \|_\infty \big| < 3 \varepsilon
+    \end{equation*}
+    so that $\lim_{p \to \infty} \| f \|_p = \| f \|_\infty$
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

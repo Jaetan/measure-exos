@@ -1,0 +1,244 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\newtheorem{exercise}{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+  Let $(X,\mathscr{A})$ be a measurable space. Use Proposition 2.6.1
+  and Example 2.1.2(a) to give another proof that if
+  $f,g:X\to\mathbb{R}$ are measurable, then $f+g$ and $fg$ are
+  measurable. (Hint: Consider the function $H:X\to\mathbb{R}^2$
+  defined by $H(x)=(f(x),g(x))$.)
+\end{exercise}
+
+\begin{proof}
+  As a reminder, Proposition 2.6.1 shows that $f\circ g$ is measurable
+  when both $f$ and $g$ are measurable. Example 2.1.2(a) shows that
+  $f$ non-decreasing on an interval $I$ is Borel-measurable.
+
+  Example 2.6.5 noted that
+  $f(x)=\big(f_1(x),f_2(x),\cdots,f_n(x)\big)$ is measurable on
+  $\big(\mathbb{R}^n,\mathscr{B}(\mathbb{R}^n)\big)$ if and only if
+  $\forall i, f_i$ is measurable on
+  $\big(\mathbb{R},\mathscr{B}(\mathbb{R})\big)$. From this we deduce
+  that the function $H$ is measurable.
+
+  Next, we note that the functions $\mathbb{R}^2\to\mathbb{R}$ defined
+  by $\phi:(x,y)\mapsto x + y$ and $\psi:(x,y)\mapsto xy$ are
+  continuous on $\mathbb{R}^2$, and therefore measurable on
+  $\big(\mathbb{R}^2,\mathscr{B}(\mathbb{R}^2)\big)$. From proposition
+  2.6.1, we deduce that the composites $\phi\circ H$ and $\psi\circ H$
+  are Borel-measurable
+\end{proof}
+
+% ------------------------------------------------------------------------------
+
+\begin{exercise}
+  Show that if $f$ is a measurable complex-valued function on
+  $(X,\mathscr{A})$, then $|f|$ is also measurable.
+\end{exercise}
+
+\begin{proof}
+  The functions $\mathbb{C}\to\mathbb{R}^2, z\mapsto(\Re z, \Im z)$
+  and $\mathbb{R}^2\to\mathbb{R}_+, (x,y)\mapsto \sqrt{x^2+y^2}$ are
+  composable and continuous on their respective domains, so their
+  composite $\mathbb{C}\to\mathbb{R}_+, z\mapsto|z|$ is also
+  continuous and thus Borel-measurable
+\end{proof}
+
+% ------------------------------------------------------------------------------
+
+\begin{exercise}
+Let $(X,\mathscr{A})$ be a measurable space, and let
+$f,g:X\to\mathbb{C}$ be measurable. Show that if $g$ does not vanish,
+then $f/g$ is measurable.
+\end{exercise}
+
+\begin{proof}
+  We note that:
+  \begin{equation*}
+    \forall z\in\mathbb{C}\mid g(z)\neq 0,\quad
+    \frac{f(z)}{g(z)}=\frac{f(z)\overline{g(z)}}{|g(z)|^2}
+  \end{equation*}
+  The functions $\mathbb{R}_+^*\to\mathbb{R}_+^*, x\mapsto 1/x$,
+  $\mathbb{C}\to\mathbb{R}_+, z\mapsto|z|^2$, and
+  $\mathbb{C}\to\mathbb{C}, z\mapsto\overline{z}$ are all
+  continuous. Whenever $g(z)$ is not zero, the expression given in the
+  equation above is the product of a real-valued function
+  $\phi(z)=1/|g(z)|^2$ and complex-valued function
+  $\psi(z)=f(z)\overline{g(z)}$.
+  As the composition of Borel-measurable functions wherever $g$ does
+  not vanish, $\phi$ is Borel-measurable. The function $\psi$ is
+  continuous as the composition of continuous fonctions, and is
+  therefore Borel-measurable. We deduce that the product
+  $\phi(z)\psi(z)=f(z)/g(z)$ is Borel-measurable wherever both $\phi$
+  and $\psi$ are Borel-measurable, e.g. wherever $g$ is not zero
+\end{proof}
+
+% ------------------------------------------------------------------------------
+
+\begin{exercise}
+Not done.
+\end{exercise}
+
+% ------------------------------------------------------------------------------
+
+\begin{exercise}
+  Let X and Y be sets, and let $f$ be a function from X to Y. Show that
+  \begin{enumerate}
+  \item if $\mathscr{A}$ is a $\sigma$-algebra on X, then $\{B\subset
+    Y:f^{-1}(B)\in\mathscr{A}\}$ is a $\sigma$-algebra on Y
+  \item if $\mathscr{B}$ is a $\sigma$-algebra on Y, then
+    $\{f^{-1}(B):B\in\mathscr{B}\}$ is a $\sigma$-algebra on X, and
+  \item if $\mathscr{C}$ is a collection of subsets of $Y$, then
+    \begin{equation*}
+      \sigma\big(\{f^{-1}(C):C\in\mathscr{C}\}\big)=\{f^{-1}(B):B\in\sigma(\mathscr{C})\}
+    \end{equation*}
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  \hfill
+  \begin{enumerate}
+  \item
+    Let us note $\mathscr{B}=\{B\subset
+    Y:f^{-1}(B)\in\mathscr{A}\}$. $Y\subset Y$ and $f^{-1}(Y)=\{x\in
+    X\mid f(x)\in Y\} = X\in\mathscr{A}$, so $Y\in\mathscr{B}$. Next,
+    we note that for all $B\subset Y$, we have
+    $f^{-1}(B)^c=f^{-1}(B^c)$, so $\mathscr{B}$ is stable by
+    complementation. Finally, for any family of sets $B$,
+    $f^{-1}\left(\bigcup B\right)=\bigcup f^{-1}(B)$, which gives us
+    the stability of $\mathscr{B}$ for unions (we only need countable
+    unions). Combining the preceding results, we conclude that
+    $\mathscr{B}$ is a $\sigma$-algebra on $Y$.
+
+  \item Let us note $\mathscr{A}=\{f^{-1}(B):B\in\mathscr{B}\}$. As
+    noted above, $f^{-1}(Y)=X$, so $X\in\mathscr{A}$. The same
+    arguments on complementation and stability by union from the
+    previous point apply here too, completing the proof that
+    $\mathscr{A}$ is a $\sigma$-algebra on $X$.
+
+  \item
+    For every $\sigma$-algebra $\mathscr{B}$ on $Y$ that contains
+    $\mathscr{C}$, $g(\mathscr{B})=\{f^{-1}(B):B\in\mathscr{B}\}$ is a $\sigma$-algebra
+    on $X$. The family $\mathscr{F}$ of such $\sigma$-algebras respects inclusion:
+    if for $\mathscr{B}\in\mathscr{F}$ and
+    $\mathscr{D}\in\mathscr{F}$, we have $\mathscr{B}\subset\mathscr{D}$, then
+    $g(\mathscr{B})\subset g(\mathscr{D})$ is also true. We conclude the following:
+    \begin{align*}
+      g\left(\bigcap_{F\in\mathscr{F}}F\right) &= \bigcap_{F\in\mathscr{F}}g(F) & with\\
+      g\left(\bigcap_{F\in\mathscr{F}}F\right) &= g\big(\sigma(\mathscr{C})\big) = \{f^{-1}(B):B\in\sigma(\mathscr{C})\} & and\\
+      \bigcap_{F\in\mathscr{F}}g(F) &= \sigma\big(\{f^{-1}(B):B\in\mathscr{C}\}\big)
+    \end{align*}
+
+  \end{enumerate}
+\end{proof}
+
+% ------------------------------------------------------------------------------
+
+\begin{exercise}
+Let $\mu$ be a nonzero finite Borel measure on $\mathbb{R}$, and let
+$F:\mathbb{R}\to\mathbb{R}$ be the function defined by
+$F(x)=\mu\big((-\infty,x]\big)$. Define a function $g$ on the interval
+  $\big(0,\lim_{x\to+\infty}F(x)\big)$ by
+  \begin{equation*}
+    g(x)=\inf\{t\in\mathbb{R}:F(t)\geq x\}.
+  \end{equation*}
+  \begin{enumerate}
+    \item Show that $g$ is nondecreasing, finite valued, and Borel
+      measurable.
+    \item Show that $\mu=\lambda g^{-1}$. (Hint: start by showing that
+      $\mu(B)=\lambda\big(g^{-1}(B)\big)$ when $B$ has the form $(-\infty,b]$.)
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  \hfill
+  \begin{enumerate}
+  \item
+    $\mu$ being a nonzero finite measure, $0\leq
+    F(x)\leq\mu(\mathbb{R})$, $\lim_{x\to{-\infty}}F(x)=0$ and
+    $\lim_{x\to{+\infty}}F(x)=\mu(\mathbb{R})$. Further, $F$ is
+    non-decreasing, non-negative, right-continuous (Proposition
+    1.3.9).
+
+    Let $x$ and $y$ in $\big(0,\lim_{x\to+\infty}F(x)\big)$ such
+    that $x<y$. For all $t$ such that $F(t)\geq y$, we also have
+    $F(t)\geq x$, and therefore $\{t\in\mathbb{R}:F(t)\geq y\} \subset
+    \{t\in\mathbb{R}:F(t)\geq x\}$, from which we deduce that $g(y)\geq
+    g(x)$.
+
+    $g$ being non-decreasing on the interval
+    $\big(0,\lim_{x\to+\infty}F(x)\big)$ is therefore Borel-measurable
+    on that interval.
+
+    Let $x\in\mathbb{R}$ such that $0<x<\lim_{+\infty}F$.
+    Since $\mu$ is nonzero, such an $x$ exists, and thus there also
+    exists $t_0\in\mathbb{R}$ such that $F(t_0)\geq x$.
+    This shows that $\left\{t\in\mathbb{R}:F(t)\geq
+    x\right\}\neq\varnothing$.
+    Since $\lim_{-\infty}F=0$ and $x>0$, there exists
+    $t_1\in\mathbb{R}$ such that $0\leq F(t_1)<x$. $F$ being
+    non-decreasing, we have $t_1<t_0$, which shows that
+    $\left\{t\in\mathbb{R}:F(t)\geq x\right\}$ has a lower bound in
+    $\mathbb{R}$, e.g. $g$ has finite values.
+
+  \item
+    Let $b\in\mathbb{R}$ and $B=({-\infty},b]$.
+      We have
+      \begin{align*}
+        \lambda\left(g^{-1}(B)\right) &=
+        \int_{\mathbb{R}}\chi_{g^{-1}(B)}\,\mathrm{d}\lambda
+        = \int_0^{\underset{+\infty}\lim F}\chi_B\circ g\,\mathrm{d}\lambda
+        = \int_{\mathbb{R}}\chi_B\,\mathrm{d}\!\left(\lambda
+        g^{-1}\right)\\
+        &= \lambda g^{-1}(B)\\
+        \mu(B) &= \int_{-\infty}^b\mathrm{d}\mu =
+        \int_0^{F(b)}g\,\mathrm{d}\lambda =
+        \int_0^{\underset{+\infty}\lim F}\chi_B\circ g\,\mathrm{d}\lambda
+      \end{align*}
+      so $\mu(B) = \lambda g^{-1}(B)$.
+      Since the Borel $\sigma$-algebra on $\mathbb{R}$ is generated by
+      sets of the form $({-\infty},b]$ for $b\in\mathbb{R}$ and the
+      measures $\mu$ and $\lambda g^{-1}$ agree on such sets, we
+      conclude that they agree on the whole of the Borel
+      $\sigma$-algebra.
+  \end{enumerate}
+\end{proof}
+
+% ------------------------------------------------------------------------------
+
+\begin{exercise}
+Show that a convex subset of $\mathbb{R}^2$ need not be a Borel
+set. (Hint: consider an open ball, together with part of its
+boundary).
+\end{exercise}
+
+\begin{proof}
+Let $B$ be a non-Borel set in $[0,1]$ and $f : [0,1] \to \mathscr{C},
+x \mapsto \big(cos(2\pi x), sin(2\pi x)\big)$ with $\mathscr{C} =
+\{(x, y) \mid x^2 + y^2 = 1\}$ the unit circle for the Euclidean
+norm.
+
+$f$ is continuous, hence Borel-measurable. $f$ is also injective,
+which implies that $f^{-1}\big(f(B)\big) = B$; hence $f(B)$ is not a
+Borel set.
+
+Let $\mathscr{D} = \{(x,y) \mid x^2 + y^2 < 1\}$ be the open unit ball
+of $\mathbb{R}^2$. $\mathscr{D}$ is convex. Since $f(B) \subset
+\mathscr{C}$, line segments from points in $f(B)$ to any other point
+in $f(B)$ or $\mathscr{D}$ stay in $\mathscr{D}$ (except for the end
+points which can be in $f(B)$). Therefore $\mathscr{D} \cup f(B)$ is a
+convex set.
+
+However, $\mathscr{D} \cup f(B)$ is not a Borel set, since
+$\mathscr{D}$ is a Borel set but $f(B)$ is not
+\end{proof}
+
+\end{document}

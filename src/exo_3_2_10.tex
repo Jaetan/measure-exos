@@ -1,0 +1,101 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{9}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $l^2$ be the set of all infinite sequences $\{ x_n \}$ of real numbers for which $\sum_n x_n^2 < +\infty$.
+  \begin{enumerate}[(a)]
+
+  \item Show that $l^2$ is a vector space over $\mathbb{R}$. (Hint: show that $(x + y)^2 \leq 2 x^2 + 2 y^2$ holds for all reals $x$ and $y$.)
+
+  \item Show that the formula $(\{ x_n \}, \{ y_n \}) = \sum_n x_n y_n$ defines an inner product on $l^2$ and hence (see part (b) of Exercise 7)
+    that the formula $\| \{ x_n \} \| = \left( \sum_n x_n^2 \right)^{1 / 2}$ defines a norm on $l^2$. (The issue is the convergence of $\sum_n x_n y_n$.)
+
+  \item Show that $l^2$ is complete under the norm defined in part (b) of this exercise.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item The null sequence makes a convergent series of squares, so $\{ 0, 0, \dotsc \} \in l^2$.
+    Let $x, y \in \mathbb{R}$; we have:
+    \begin{equation*}
+      (x + y)^2 = x^2 + 2 x y + y^2 = 2 x^2 + 2 y^2 - (x - y)^2 \geq 0
+    \end{equation*}
+    and since $(x - y)^2 \geq 0$, we deduce that $(x + y)^2 \leq 2 x^2 + 2 y^2$.
+    Let $\{ x_n \}, \{ y_n \} \in l^2$; we have, for all $n \in \mathbb{N}$, $0 \leq (x_n + y_n)^2 \leq 2 x_n^2 + 2 y_n^2$,
+    and since the series of terms $x_n^2$ and $y_n^2$ converge, the series of term $(x_n + y_n)^2$ converges too, so that $\{ x_n + y_n \} \in l^2$.
+    Similarly, for $\alpha, \beta \in \mathbb{R}$, $0 \leq (\alpha x_n + \beta y_n)^2 \leq 2 \alpha^2 x_n^2 + 2 \beta y_n^2$,
+    so the same reasoning shows that $\{ \alpha x_n + \beta y_n \} \in l^2$.
+    From the above, we conclude that $l^2$ is a vector space on $\mathbb{R}$.
+
+  \item Let $\{ x_n \} \in l^2$, the series $( \{ x_n \}, \{ x_n \} ) = \sum_n x_n^2$ converges, and is a series of nonnegative terms,
+    so $( \{ x_n \}, \{ x_n \} ) \geq 0$ and is zero if and only if $x_n = 0$ for all $n \in \mathbb{N}$.
+
+    Let $\{ x_n \}, \{ y_n \}, \{ z_n \} \in l^2$ and $\alpha, \beta \in \mathbb{R}$; $(\{ \alpha x_n + \beta y_n \}, \{ z_n \})$ is by definition the series
+    of term $(\alpha x_n + \beta y_n) z_n = \alpha x_n z_n + \beta y_n z_n$.
+    Since for all $x, y \in \mathbb{R}$ we have $4 x y = (x + y)^2 - (x - y)^2$ and $(x + y)^2 \leq 2 x^2 + 2 y^2$, we deduce that, for all $n \in \mathbb{N}$:
+    \begin{align*}
+      | \alpha x_n z_n + \beta y_n z_n | &= \left| \frac{\alpha}{4} (x_n + z_n)^2 - \frac{\alpha}{4} (x_n - z_n)^2 \right. \\
+      &\quad \left. + \frac{\beta}{4} (y_n + z_n)^2 - \frac{\beta}{4} (y_n - z_n)^2 \right| \\
+      &\leq \frac{| \alpha |}{2} (x_n^2 + z_n^2) + \frac{| \alpha |}{2} (x_n^2 + z_n^2) \\
+      &\quad + \frac{| \beta |}{2} (y_n^2 + z_n^2) + \frac{| \beta |}{2} (y_n^2 + z_n^2) \\
+      &\leq | \alpha | x_n^2 + | \beta | y_n^2 + \left( | \alpha | + | \beta | \right) z_n^2
+    \end{align*}
+    The convergence of the series $\sum_n x_n^2$, $\sum_n y_n^2$ and $\sum_n z_n^2$ implies the absolute convergence of the series $\sum_n \alpha x_n z_n + \beta y_n z_n$,
+    hence the convergence of $(\{ \alpha x_n + \beta y_n \}, \{ z_n \})$.
+
+    Last, the commutativity of multiplication of real numbers implies that $(\{ x_n \}, \{ y_n \}) = (\{ y_n \}, \{ x_n \})$,
+    so the defined formula is an inner product on $l^2$.
+
+    From Exercise 7, we conclude that $\| \{ x_n \} \| = \left( \sum_n x_n^2 \right)^{1 / 2}$ is a norm on $l^2$.
+
+  \item Let $\left( X_n \right)_{n \in \mathbb{N}}$ be a Cauchy sequence of elements of $l^2$;
+    for all $n \in \mathbb{N}$, we note $X_n = (x_{n, 0}, x_{n, 1}, \dotsc)$ and $\| X_n \| = \lambda_n \geq 0$.
+
+    We have $\left| \lambda_n - \lambda_m \right| = \left| \| X_n \| - \| X_m \| \right| \leq \| X_n - X_m \|$,
+    so $\{ \lambda_n \}$ is a Cauchy sequence of real numbers. Since $\mathbb{R}$ is complete, $\{ \lambda_n \}$ converges to a real number $\lambda \geq 0$.
+
+    Let $\varepsilon > 0$ and $N \in \mathbb{N}$ such that for all $n, m$ greater than $N$,
+    \begin{equation} \label{ineq:cauchy_for_X_n}
+      \| X_n - X_m \|^2 = \sum_{k = 0}^{+\infty} \left( x_{n,k} - x_{m, k} \right)^2 < \varepsilon^2
+    \end{equation}
+    For all $k \in \mathbb{N}$, we have:
+    \begin{equation*}
+      \left( x_{n, k} - x_{m, k} \right)^2 \leq \| X_n - X_m \|^2 < \varepsilon^2
+    \end{equation*}
+    for all $n, m$ greater than $N$, so the sequence $\left( x_{i, k} \right)_{i \in \mathbb{N}}$ is a Cauchy sequence of real numbers
+    and therefore converges to $\alpha_k \in \mathbb{R}$.
+
+    From this and \eqref{ineq:cauchy_for_X_n}, we deduce that
+    \begin{equation*}
+      0 \leq \sum_{k = 0}^{+\infty} (x_{n, k} - \alpha_k)^2 \leq \sum_{k = 0}^{+\infty} (x_{n, k} - x_{m, k})^2 < \varepsilon^2
+    \end{equation*}
+    as soon as $n, m$ are greater than $N$. So $\sum_k \alpha_k^2$ converges and
+    \begin{equation*}
+      \sum_{k = 0}^{+\infty} \alpha_k^2 = \lambda^2
+    \end{equation*}
+    Therefore the sequence $\{ X_n \}$ converges to the sequence $\{ \alpha_0, \alpha_1, \dotsc \}$ for the norm $\| \cdot \|$,
+    and $l^2$ is complete for this norm.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

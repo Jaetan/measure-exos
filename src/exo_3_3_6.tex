@@ -1,0 +1,94 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Suppose that for each subset $A$ of $\mathbb{R}^2$ and each real number $x$ we denote the set
+  $\{ y \in \mathbb{R} \mid (x, y) \in A \}$ by $A_x$. Let $\mathscr{A}$ consist of those subsets $A$
+  of $\mathbb{R}^2$ that satisfy $A_x \in \mathscr{B} (\mathbb{R})$ for each $x$ in $\mathbb{R}$, and define
+  $\mu : \mathscr{A} \to [0, {+\infty}]$ by
+  \begin{equation*}
+    \mu (A) = \begin{cases}
+      \sum_x \lambda ( A_x ) &\quad\text{ if } A_x \neq \varnothing \text{ for only countably many } x \\
+      +\infty &\quad\text{ otherwise }
+    \end{cases}
+  \end{equation*}
+  \begin{enumerate}[(a)]
+  \item Show that $\mathscr{A}$ is a $\sigma$-algebra on $\mathbb{R}^2$ and that $\mu$ is a measure on $(\mathbb{R}^2, \mathscr{A})$.
+  \item Show that $\{ (x, y) \in \mathbb{R}^2 \mid y = 0 \}$ is locally $\mu$-null but not $\mu$-null.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}
+
+  \begin{enumerate}[(a)]
+
+  \item First, note that $\varnothing \in \mathscr{A}$ since the property defining elements of $\mathscr{A}$ is vacuously true for $\varnothing$,
+    and that $\mathbb{R}^2 \in \mathscr{A}$ since the condition defining $\mathbb{R}_x^2$ holds by definition.
+
+    Next, take $A_1, A_2, \dotsc$ a countable family of elements of $\mathscr{A}$, and consider $A = \cap_{i \in \mathbb{N}} A_i$.
+    For each $x \in A$, and each $i \in \mathbb{N}$, $A_{i, x} \in \mathscr{B} ( \mathbb{R} )$, so that $A_x = \cap_{i \in \mathbb{N}} A_{i, x} \in \mathscr{B} ( \mathbb{R} )$
+    and thus $A \in \mathscr{A}$. Therefore $\mathscr{A}$ is stable by countable intersection.
+
+    Let $A \in \mathscr{A}$ and $B = \mathbb{R}^2 - A$.
+    Let $x \in \mathbb{R}$. For all $y \in \mathbb{R}$, either $(x, y) \in A$, and then $y \in A_x$, or $(x, y) \in B$, and then $y \in B_x$.
+    From this we deduce that $B_x = \mathbb{R} - A_x \in \mathscr{B} ( \mathbb{R} )$.
+    This last point is the definition of $B \in \mathscr{A}$, so $\mathscr{A}$ is stable by complement.
+
+    From the above points we conclude that $\mathscr{A}$ is a $\sigma$-algebra on $\mathbb{R}^2$.
+
+    Let $A = \varnothing$. For all $x \in \mathbb{R}$, we have $\lambda ( A_x ) = \lambda ( \varnothing ) = 0$ so that $\mu ( A ) = 0$.
+    Also, $\forall B \in \mathscr{B} ( \mathbb{R} )$, $\lambda (B) \geq 0$ so that $\mu (A) \geq 0$ for all $A \in \mathscr{A}$.
+    Let $A \in \mathscr{A}$, we have $A = \cup_{x \in \mathbb{R}} \{ x \} \times A_x$. Let $A_1, A_2, \dotsc$ be a countable sequence of disjoint sets in $\mathscr{A}$,
+    and let, for all $x \in \mathbb{R}$, $C_x = \cup_{i \in \mathbb{N}} A_{i, x} \in \mathscr{B} ( \mathbb{R} )$.
+    If for $x \in \mathbb{R}$ and $i, j \in \mathbb{N}$ distinct, there exists $z \in A_{i, x} \cap A_{j, x}$, then $(x, z) \in A_i \cap A_j$, which is impossible since
+    the $A_i$ are disjoint. Therefore $\lambda ( C_x ) = \sum_{i \in \mathbb{N}} A_{i, x}$. We also have
+
+    \begin{align} \label{eq:mu_union}
+      \mu \left( \bigcup_{i \in \mathbb{N}} A_i \right) &= \mu \left( \bigcup_{i \in \mathbb{N}} \bigcup_{x \in \mathbb{R}} \{ x \} \times A_{i, x} \right) \notag \\
+      &= \mu \left( \bigcup_{x \in \mathbb{R}} \{ x \} \times C_x \right)  \notag \\
+      &= \begin{cases}
+        \sum_{x \in \mathbb{R}} \lambda \left( C_x \right) &\text{ if } C_x \neq \varnothing \text{ for countably many } C_x \\
+        +\infty &\text{ otherwise }
+      \end{cases}
+    \end{align}
+
+    For countably many nonempty $C_x$, we get
+    \begin{equation*}
+      \sum_{x \in \mathbb{R}} \lambda ( C_x ) =
+      \sum_{x \in \mathbb{R}} \sum_{i \in \mathbb{N}} \lambda ( A_{i, x} ) = \sum_{i \in \mathbb{N}} \sum_{x \in \mathbb{R}} \lambda ( A_{i, x} )
+      = \sum_{i \in \mathbb{N}} \mu \left( A_i \right)
+    \end{equation*}
+    If countably many $A_{i, x}$ are nonempty, then countably many $C_x$ are nonempty, so if uncountably many $C_x$ are nonempty,
+    we get from \eqref{eq:mu_union} $\mu ( \cup_{i \in \mathbb{N}} A_i ) = +\infty$. In that case, also, there is at least one $A_j$ such that
+    there are uncountably many nonempty $A_{j, x}$. This gives us $\mu ( A_j ) = +\infty$, from which we deduce that $\sum_{i \in \mathbb{N}} \mu (A_i) = +\infty$.
+    We can then conclude that
+    \begin{equation*}
+      \mu \left( \bigcup_{i \in \mathbb{N}} A_i \right) = \sum_{i \in \mathbb{N}} \mu ( A_i )
+    \end{equation*}
+    and that $\mu$ is a measure on $( \mathbb{R}^2, \mathscr{A} )$.
+
+  \item Let $N = \{ (x, y) \in \mathbb{R}^2 \mid y = 0 \} = \mathbb{R} \times \{ 0 \}$, and let $A \in \mathscr{A}$ such that $\mu ( A )$ is finite.
+    If $A = \varnothing$, then $\mu ( N \cap A ) = \mu ( \varnothing ) = 0$.
+    Otherwise, for all $x \in A$, we have $N \cap \{ x \} \times A_x \subset \{ (x, 0) \} \in \mathscr{A}$.
+    Since $A_x \neq \varnothing$ for only countably many values of $x$, we have $\mu ( N \cap A ) = \sum_x \lambda ( N \cap A_x ) = 0$,
+    from which we conclude that $N$ is a locally $\mu$-null set.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

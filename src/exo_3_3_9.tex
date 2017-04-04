@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{8}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $(X, \mathscr{A})$ be a measurable space, and let $\mu$ be a measure on $(X, \mathscr{A})$ such that $\mu ( X ) = 1$.
+  Suppose that $1 \leq p_1 < p_2 < +\infty$.
+  \begin{enumerate}[(a)]
+  \item Show that if $f$ belongs to $\mathscr{L}^{p_2} ( X, \mathscr{A}, \mu )$, then $f$ belongs to $\mathscr{L}^{p_1} ( X, \mathscr{A}, \mu )$
+    and satisfies $\| f \|_{p_1} \leq \| f \|_{p_2}$. (Hint: use H\"older's inequality or Jensen's inequality.)
+  \item Show that if $f$ and $f_1, f_2, \dotsc$ belong to $\mathscr{L}^{p_2} ( X, \mathscr{A}, \mu )$ and $\{ f_n \}$ converges to $f$ in ${p_2}$th mean,
+    then $\{ f_n \}$ converges to $f$ in $p_1$th mean.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+\item Let $1 \leq p_1 < p_2$ and $f \in \mathscr{L}^{p_2}$. Let $p = p_2 / p_1$ and let $q$ be such that $1 / p + 1 / q = 1$.
+  For all $x \in X$, we have
+  \begin{align*}
+    | f (x) | &= | f (x) |^{1 / q} \cdot | f (x) |^{1 / p} \leq \frac{ | f (x) |^{p / q} }{p} + \frac{ | f (x) |^{q / p} }{q} \\
+    pq &= p + q \\
+    q &= \frac{p}{p - 1} = \frac{1}{1 - \frac{p_1}{p_2} } = \frac{p_2}{p_2 - p_1} \\
+    \frac{q}{p} &= \frac{p_1}{p_2 - p_1} \\
+    \frac{p}{q} &= \frac{p_2 - p_1}{p_1}
+  \end{align*}
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,41 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $\mu$ be a finite measure on $(A, \mathscr{A})$ and $f$ and $f_1, f_2, \dotsc$ be real-valude $\mathscr{A}$-measurable functions on $X$.
+  Show that $\{ f_n \}$ converges to $f$ in measure if and only if each subsequence of $\{ f_n \}$ has a subsequence that converges to $f$ almost everywhere.
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  Suppose that $\{ f_n \}$ converges to $f$ in measure and let $\{ g_n \}$ be a subsequence of $\{ f_n \}$.
+  Then $\{ g_n \}$ also converges to $f$ in measure; therefore there exists a subsequence $\{ h_n \}$ of $\{ g_n \}$ that converges to $f$ almost everywhere.
+  Since $\{ h_n \}$ is also a subsequence of $\{ f_n \}$, we have the first part of the result.
+
+  Conversely, suppose that each subsequence of $\{ f_n \}$ has a subsequence that converges to $f$ almost everywhere, and suppose that $\{ f_n \}$ does not
+  converge to $f$ in measure. There exists $\epsilon > 0$ and $\delta > 0$ such that
+  \begin{equation}\label{eq:notinmeasure}
+    \forall N \in \mathbb{N},\quad \exists n \geq N,\quad \mu \big( \{ x \in X \mid | f_n (x) - f (x) | > \delta \} \big) > \epsilon
+  \end{equation}
+  Using this inegality with $N = 0, 1, \dotsc$ we define a subsequence $\{ g_n \}$ of $\{ f_n \}$ such that $\mu \big( \{ x \in X \mid | g_n (x) - f (x) | > \delta \} \big) > \epsilon$
+  for all $n \in \mathbb{N}$. Since $\{ g_n \}$ is a subsequence of $\{ f_n \}$, we can extract from it a subsequence $\{ h_n \}$ that converges to $f$ almost everywhere.
+  Since $\mu$ is finite, $\{ h_n \}$ converges to $f$ also in measure. However, $\{ h_n \}$ being a subsequence of $\{ f_n \}$ must verify \eqref{eq:notinmeasure},
+  which is a contradiction. From this, we deduce that $\{ f_n \}$ must converge to $f$ also in measure.\qedhere
+
+\end{proof}
+
+\end{document}

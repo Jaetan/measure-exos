@@ -1,0 +1,47 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{1}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+  Let $\mu$ be the counting measure on the $\sigma$-algebra of all subsets of $\mathbb{N}$ and let $f$ and $f1, f2, \ldots$ be real-valued functions on $\mathbb{N}$.
+  Show that $\{ f_n \}$ converges to $f$ in measure if and only if it converges uniformly to $f$.
+\end{exercise}
+
+\begin{proof}\hfill
+
+  Suppose that $\{ f_n \}$ converges to $f$ in measure and let $\epsilon > 0$. Then there exists $N \in \mathbb{N}$ such that
+  \[
+  \forall n \geq N, \mu \big( \{ x \in \mathbb{N} \mid | f_n (x) - f (x) | > \epsilon \} \big) < 1 / 2
+  \]
+  With $\mu$ being the counting measure, this implies that
+  \[
+  \forall n \geq N, \{ x \in \mathbb{N} \mid | f_n (x) - f (x) | > \epsilon \} = \varnothing
+  \]
+  which gives us the uniform convergence of $\{ f_n \}$ to $f$.
+
+
+  Conversely, suppose that $\{ f_n \}$ converges uniformly to $f$, and let $\epsilon > 0$. Then there exists $N \in \mathbb{N}$ such that
+  \[
+  \forall n \geq N,\; \forall x \in \mathbb{N}, | f_n (x) - f (x) | \leq \epsilon
+  \]
+  from which we get $\{ x \in \mathbb{N} \mid | f_n (x) - f(x) | > \epsilon \} = \varnothing$,
+  which is a set of measure $0$. Summarizing,
+  \[
+  \forall \epsilon > 0,\; \exists N \in \mathbb{N},\; \mu \big(\{ x \in \mathbb{N} \mid | f_n (x) - f (x) | > \epsilon \} \big) = 0
+  \]
+  which implies that $\{ f_n \}$ converges to $f$ in measure.
+
+\end{proof}
+
+\end{document}

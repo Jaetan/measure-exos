@@ -1,0 +1,65 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $V$ be a vector space over $\mathbb{R}$. A function $(\cdot, \cdot): V \times V \to \mathbb{R}$ is an \emph{inner product} on $V$ if
+  \begin{enumerate}[(i)]
+  \item $(x, x) \geq 0$
+  \item $(x, x) = 0$ if and only if $x = 0$
+  \item $(x, y) = (y, x)$
+  \item $(\alpha x + \beta y, z) = \alpha (x, z) + \beta (y, z)$
+  \end{enumerate}
+  hold for all $x, y, z$ in $V$ and all $\alpha, \beta$ in $\mathbb{R}$. An \emph{inner product space} is a vector space, together with an inner product on it.
+  The norm $\| \cdot \|$ associated with the inner product $(\cdot, \cdot)$ is defined by $\| x \| = \sqrt{(x, x)}$.
+  \begin{enumerate}[(a)]
+  \item Prove that an inner product satisfies the \emph{Cauchy-Schwartz inequality:} if $x, y \in V$, then $|(x, y)| \leq \| x \| \| y \|$.
+    (Hint: define a function $p : \mathbb{R} \to \mathbb{R}$ by $p (t) = \| x \|^2 + 2 t (x, y) + t^2 \| y \|^2$ and note that $p (t) = \| x + t y \|^2 \geq 0$ holds
+    for each real $t$; then recall that a quadratic polynomial $a t^2 + bt + c$ is nonnegative for each $t$ if and only if $b^2 - 4 a c \leq 0$).
+  \item Verify that the norm associated with $(\cdot, \cdot)$ is indeed a norm. (Hint: use the Cauchy-Schwartz inequality when checking the triangle inequality).
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Fix $x, y \in V$ and consider $p (t) = \| x + t y \|^2$ for all $t \in \mathbb{R}$. We have:
+    \begin{align*}
+      p (t) &= (x + t y, x + t y) = (x, x) + (x, t y) + (t y, x) + (y, y) \\
+      &= \| x \|^2 + 2 t (x, y) + t^2 \| y \|^2
+    \end{align*}
+    by the rules of the inner product, and $p (t) \geq 0$ since $(z, z) \geq 0$ for all $z \in V$.
+    $p (t)$ can only be positive if, as a polynomial in $t \in \mathbb{R}$ with real coefficients, it does not have any real roots,
+    which in turns necessitates that its discriminant $4 (x, y)^2 - 4 \| x \|^2 \| y \|^2$ be negative. This gives us $(x, y)^2 \leq \| x \|^2 \| y \|^2$,
+    which in turn implies that $| (x, y) | \leq \| x \| \| y \|$.
+
+  \item Since $(x, x) \geq 0$ for all $x \in V$ and $(x, x) = 0$ if and only $x = 0$, $\| x \| = \sqrt{(x, x)} \geq 0$ and is zero if and only if $x = 0$.
+    For all $\alpha \in \mathbb{R}$ and $x \in V$, $\| \alpha x \|^2 = (\alpha x, \alpha x) = \alpha (x, \alpha x) = \alpha (\alpha x, x) = \alpha^2 (x, x) \geq 0$,
+    so that $\| \alpha x \| = | \alpha | \| x \|$. Finally, for $x, y \in V$, we have:
+    \begin{align*}
+      \| x + y \|^2 &= \| x \|^2 + 2 (x, y) + \| y \|^2 \\
+      \| x + y \|^2 &\leq \| x \|^2 + 2 | (x, y) | + \| y^2 \| \\
+      \| x + y \|^2 &\leq \| x \|^2 + 2 \| x \| \| y \| + \| y \|^2 \text{ \quad by Cauchy-Schwartz } \\
+      \| x + y \|^2 &\leq \left( \| x \| + \| y \| \right)^2
+    \end{align*}
+    and since both sides of the last inequality are the squares of positive reals, we conclude that $\| x + y \| \leq \| x \| + \| y \|$, and the norm associated with the inner product is a norm.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}
