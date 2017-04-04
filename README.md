@@ -11,3 +11,5 @@ The repository contains the LaTeX sources for the solutions, named after the sec
 # Intent
 
 I use this repository to track the exercises I worked on and keep a backup of the LaTeX sources on my hard drive. New content is only added as I do more exercises. It is unlikely that people besides the two of us will be interested in what's here; I am writing this file in case someone stumbles across this repository and wonders what it is about.
+
+The exercises I did until section 2.6 of the book were on a physical notebook only. Maybe one day I will take the time to put them online and complete my collection.
