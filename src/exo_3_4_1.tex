@@ -1,0 +1,78 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[subsection]
+
+\setcounter{section}{3}
+\setcounter{subsection}{4}
+\setcounter{proposition}{2}
+
+\begin{document}
+
+\begin{exercise}
+
+  Use Proposition 3.4.3 to show that if $1 \leq p < +\infty$ then $L^p ( [ a, b ] )$ is separable.
+
+\end{exercise}
+
+\begin{proposition}
+
+  Suppose that $[ a, b ]$ is a closed bounded interval and that $p$ satisfies $1 \leq p < +\infty$.
+  Then the subspace of $L^p ( [ a, b ])$ determined by the step functions on $[ a, b ]$ is dense in $L^p ( [ a, b ] )$.
+
+\end{proposition}
+
+\begin{proof}
+
+  Given Proposition 3.4.3, it is enough to show that the subspace of $L^p ( [ a, b ] )$ determined by the step functions on $[ a, b ]$
+  has a countable dense subspace.
+
+  Furthermore, complex-valued functions can be decomposed into their real and imaginary parts and the following result applied in turn to
+  each of them; so we are only considering real-valued functions.
+
+  Let $\alpha, \beta \in [ a, b ]$ such that $\alpha < \beta$ and let $\varepsilon > 0$.
+  There exist $q, r \in \mathbb{Q}$ such that $0 \leq q - \alpha \leq \varepsilon$ and $0 \leq \beta - r \leq \varepsilon$.
+  From this we deduce that $\| \chi_{[ \alpha, \beta ]} - \chi_{[ q, r ]} \|_p = ( q - \alpha )^{1 / p} + ( \beta - r )^{1 / p} \leq 2 \varepsilon^{1 / p}$, so that $\chi_{[ \alpha, \beta ]}$
+  can be approximated by the characteristic function of a bounded interval with rational endpoints.
+
+  Next, let $f = \sum_{i = 0}^n f_i \chi_{A_i}$ with $A_i = [ a_i, a_{i + 1} ]$ be a step function on $[ a, b ]$.
+  Let $g_i$ be rational numbers such that $| f_i - g_i | \leq \varepsilon$ for all $i$,
+  and let $Q_i = [ q_i, q_{i + 1} ]$ be a subinterval of $( a_i, a_{i + 1} )$ with rational endpoints such that $\lambda ( A_i - Q_i ) \leq \varepsilon$.
+  Define a step function $h$ on $[ a, b ]$ such that
+  \begin{equation*}
+    h ( x ) = \begin{cases}
+      g_i &\text{ if } q_i \leq x < q_{i + 1} \\
+      0 &\text{ otherwise }
+    \end{cases}
+  \end{equation*}
+  Then
+  \begin{align*}
+    \| f - h \|_p^p &= \int_a^b \left| \sum_{i = 0}^n f_i \chi_{A_i} - \sum_{i = 0}^n g_i \chi_{Q_i} \right|^p \,\mathrm{d}\lambda \\
+    &= \sum_{i = 0}^n | f_i - g_i |^p \lambda ( Q_i ) + \sum_{i = 0}^n | f_i |^p \lambda ( A_i - Q_i ) \\
+    &\leq \varepsilon^p \cdot ( b - a ) + \varepsilon \cdot ( n + 1 ) \cdot \max_i \{ | f_i |^p \} \\
+  \end{align*}
+  Since $n$ and the $f_i$ only depend on $f$, we conclude that each step function $f$ on $[ a, b ]$ can be approximated by a step function on $[ a, b ]$
+  with rational values and a subdivision $a = q_0 < q_1 < \dotsb < q_{n - 1} < q_n = b$ with $q_i$ rational for $0 < i < n$.
+
+  The set $R = \{ (q, r) \in \mathbb{Q}^2 \mid [ q, r ] \in [ a, b ] \}$ is countable, as it is a subset of $\mathbb{Q}^2$ which is countable.
+  For a given $n \in \mathbb{N}$, there is an injection of the set of step functions taking $n$ rational values on a subdivision $\{ q_i \}$ as above
+  into $T_n = ( \mathbb{Q} \times R )^n$, which is countable. Finally, there is an injection from the set $H$ of step functions defined as $h$ above into
+  the set $\cup_{n \in \mathbb{N}} T_n$, which is countable as the countable union of countable sets.
+
+  The set $H$ is stable by pointwise addition, multiplication by a rational constant, and contains the function $0$, so it is a $\mathbb{Q}$-vector space,
+  and a subspace of the space of step functions on $[ a, b ]$. Thus $H$ determines a countable dense subspace of $L^p ( [ a, b ] )$.
+
+\end{proof}
+
+\end{document}
