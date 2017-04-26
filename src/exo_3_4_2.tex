@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{1}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that $L^\infty ( [ a, b ] )$ is not separable. (Hint: consider the elements of $L^\infty ( [ a, b ] )$)
+  determined by the characteristic functions of the sets $[ a, c ]$ for $a < c < b$.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $X$ be the set of characteristic functions of the sets $[ a, c ]$ for $a < c < b$,
+  and let $c_1, c_2 \in [ a, b ]$ such that $c_1 < c_2$. Then
+  \begin{equation*}
+    \left\| \chi_{[ a, c_1 ]} - \chi_{[ a, c_2 ]} \right\|_\infty = \left\| \chi_{( c_1, c_2 )} \right\|_\infty = 1
+  \end{equation*}
+  Suppose that $\left( \varphi_n \right)_{n \in \mathbb{N}}$ is a countable dense family of functions in $\mathscr{L}^\infty ( [ a, b ] )$,
+  and let $\varepsilon > 0$. For all $n, m \in \mathbb{N}$ such that
+  \begin{align*}
+    \left\| \chi_{[ a, c_1 ]} - \varphi_n \right\|_\infty &< \frac{\varepsilon}{3} \\
+    \left\| \chi_{[ a, c_2 ]} - \varphi_m \right\|_\infty &< \frac{\varepsilon}{3}
+  \end{align*}
+  we have
+  \begin{align} \label{ineq:min_distance}
+    \| \varphi_n - \varphi_m \|_\infty &= \left\| ( \varphi_n - \chi_{[ a, c_1 ]} )
+    + \left( \chi_{[ a, c_1 ]} - \chi_{[ a, c_2 ]} \right)
+    + \left( \chi_{[a, c_2]} - \varphi_m \right) \right\|_\infty \notag \\
+    &\geq \left\| \chi_{( c_1, c_2 )} \right\|_\infty - \left( \left\| \chi_{[ a, c_1 ]} - \varphi_n \right\|_\infty + \left\| \chi_{[ a, c_2 ]} - \varphi_m \right\|_\infty \right) \notag \\
+    &\geq 1 - \frac{2}{3} \varepsilon
+  \end{align}
+  which is positive for $\varepsilon$ sufficiently small. Choose such an $\varepsilon$, and, for all $\chi_{[ a, c ]} \in X$,
+  choose one $\varphi_n$ such that $\left\| \chi_{[ a, c ]} - \phi_n \right\|_\infty < \varepsilon / 3$,
+  and call it $\varphi_c$. The function
+  \begin{align*}
+    \psi : X &\to \{ \varphi_n, n \in \mathbb{N} \} \\
+    \chi_{[ a, c ]} &\mapsto \varphi_c
+  \end{align*}
+  is injective: if $c \neq d$, then from \eqref{ineq:min_distance} we get $\left\| \varphi_c - \varphi_d \right\|_\infty > 0$,
+  so that $\varphi_c \neq \varphi_d$. Since $X$ is uncountable, we deduce that $\{ \varphi_n, n \in \mathbb{N} \}$ is also uncountable,
+  which is a contradiction. Therefore the family $\left( \varphi_n \right)_{n \in \mathbb{N}}$ does not exist, and $L^\infty ( [ a, b ] )$
+  is not separable.
+
+\end{proof}
+
+\end{document}
