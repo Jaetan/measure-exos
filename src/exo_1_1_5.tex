@@ -1,0 +1,40 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show by an example that the union of a collection of $\sigma$-algebras on a set $X$
+  can fail to be a $\sigma$-algebra on $X$. (Hint: there are examples in which $X$ is
+  a small finite set.)
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $X = \{ a, b, c \}$, and let
+  \begin{align*}
+    \mathscr{A}_1 &= \big\{ \varnothing, \{ a \}, \{ b, c \}, X \big\} \\
+    \mathscr{A}_2 &= \big\{ \varnothing, \{ b \}, \{ a, c \}, X \big\}
+  \end{align*}
+  Then $\mathscr{A}_1$ and $\mathscr{A}_2$ are $\sigma$-algebras on $X$. Let
+  \begin{align*}
+    \mathscr{A} &= \mathscr{A}_1 \cup \mathscr{A}_2 \\
+    &= \big\{ \varnothing, \{ a \}, \{ b \}, \{ a, c \}, \{ b, c \}, X \big\}
+  \end{align*}
+  Then $\mathscr{A}$ is not a $\sigma$-algebra on $X$, since $\{ a, c \} \cap \{ b, c \} = \{ c \} \notin \mathscr{A}$.
+
+\end{proof}
+
+\end{document}
