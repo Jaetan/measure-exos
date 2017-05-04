@@ -1,0 +1,39 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that if $\mathscr{A}$ is an algebra of sets, and if $\cup_n \,A_n$ belongs to $\mathscr{A}$
+  whenever $\{ A_n \}$ is a sequence of disjoint sets in $\mathscr{A}$, then $\mathscr{A}$ is a $\sigma$-algebra.
+
+\end{exercise}
+
+\begin{proof}
+
+  Since $\mathscr{A}$ is an algebra, it contains $\varnothing$ and is stable by complementation. To show that
+  $\mathscr{A}$ is a $\sigma$-algebra, it is enough to show that it is stable by countable unions.
+  Let $\{ A_n \}_{n \in \mathbb{N}}$ be a family of sets of $\mathscr{A}$. Define a family $\{ B_n \}_{n \in \mathbb{N}}$
+  of sets of $\mathscr{A}$ by
+  \begin{align*}
+    B_0 &= A_0 \\
+    B_{n + 1} &= A_{n + 1} - \cup_{k = 0}^n \,A_k
+  \end{align*}
+  Then $\{ B_n \}_{n \in \mathbb{N}}$ is a family of disjoint sets of $\mathscr{A}$, so $\cup_{n \in \mathbb{N}} \,B_n \in \mathscr{A}$.
+  However, $\cup_{n \in \mathbb{N}} \,B_n = \cup_{n \in \mathbb{N}} \,A_n$, so $\mathscr{A}$ is stable by countable unions,
+  and is therefore a $\sigma$-algebra.
+
+\end{proof}
+
+\end{document}
