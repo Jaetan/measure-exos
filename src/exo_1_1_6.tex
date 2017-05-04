@@ -1,0 +1,50 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Find an infinite collection of subsets of $\mathbb{R}$ that contains $\mathbb{R}$, is closed
+  under the formation of countable unions, and is closed under the formation of countable intersections,
+  but is not a $\sigma$-algebra.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $\mathscr{A} = \{ \mathbb{R} \} \cup \{ [ {-n}, n ], n \in \mathbb{N} \}$, with $\varnothing = [ {-0}, 0 ]$,
+  and let $\{ A_n \}_{n \in \mathbb{N}}$ be a family of elements of $\mathscr{A}$.
+  For all $n \in \mathbb{N}$, there exists $k \in \mathbb{N}$ such that $A_n = [ {-k}, k ]$.
+  Let $K$ be the set of all such integers $k$.
+
+  ~\\
+  If $K$ is bounded above, then it has a largest element $M$
+  since $\mathbb{N}$ is well-ordered. Then for all $n \in \mathbb{N}$, $A_n \subset [ {-M}, M ]$,
+  and there exists $m \in \mathbb{N}$ such that $A_m = [ {-M}, M ]$. From this we deduce that
+  $\cup_{n \in \mathbb{N}} \,A_k = [ {-M}, M ] \in \mathscr{A}$.
+  Otherwise, let $x \in \mathbb{R}$. Since $K$ is not bounded above, there exists $M, m \in \mathbb{N}$
+  such that $x \in A_m = [ {-M}, M ]$. From this we deduce that $\cup_{n \in \mathbb{N}} \,A_n = \mathbb{R} \in \mathscr{A}$.
+
+  ~\\
+  Since $K$ is nonempty, it has a smallest element $P$ since $\mathbb{N}$ is well-ordered, and there is some
+  $p \in \mathbb{N}$ such that $A_p = [ {-p}, p ]$. From this we deduce that $A_p = \cap_{n \in \mathbb{N}} \,A_n \in \mathscr{A}$.
+
+  ~\\
+  The set $\mathscr{A}$ is stable by countable union and countable intersection, and contains $\mathbb{R}$. However
+  it is not stable by complementation: for example $[ {-1}, 1 ] \in \mathscr{A}$, but $[ {-1}, 1 ]^c = ( {-\infty}, 1 ) \cup ( 1, {+\infty} )$
+  is not a closed interval with integer boundaries. Therefore $\mathscr{A}$ is not a $\sigma$-algebra.
+
+\end{proof}
+
+\end{document}
