@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Find all the $\sigma$-algebras on $\mathbb{N}$.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $\mathscr{A}$ be a $\sigma$-algebra on $\mathbb{N}$. For all $n \in \mathbb{N}$, let
+  $C_n = \{ A \in \mathscr{A} \mid n \in A \}$ and $U_n = \{ m \in \mathbb{N} \mid C_m = C_n \}$.
+  The family of sets $\{ U_n \}_{n \in \mathbb{N}}$ is a partition of $\mathbb{N}$:
+  \begin{itemize}
+
+  \item for all $n \in \mathbb{N}$, $n \in U_n$ so $U_n$ is nonempty, and $\mathbb{N} \subset \cup_{n \in \mathbb{N}} \,U_n$.
+
+  \item if $n, m \in \mathbb{N}$ are such that $U = U_n \cap U_m$ is nonempty, then let $p \in U$. Since $p \in U_n$,
+    we have $C_p = C_n$, and since $p \in U_m$, we also have $C_p = C_m$; from which we deduce that $C_n = C_m$.
+    This last equality implies that $U_n = U_m$, so any two sets in $\{ U_n \}_{n \in \mathbb{N}}$ are either disjoint or
+    equal.
+
+  \end{itemize}
+
+  Let $\mathscr{U} = \{ \cup_{n \in A} \,U_n, A \subset \mathbb{N} \}$. Then $\mathscr{U}$ is a $\sigma$-algebra on $\mathbb{N}$:
+  \begin{itemize}
+
+  \item $\mathscr{U}$ is stable under countable unions: let $\{ A_n \}_{n \in \mathbb{N}}$ be a countable family of elements of $\mathscr{U}$.
+    For all $n$, there exists a subset $B_n$ of $\mathbb{N}$ such that $A_n = \cup_{k \in B_n} \,U_k$. As subsets of the countable
+    set $\mathbb{N}$, the $B_n$ are countable, so that
+    \begin{equation*}
+      \bigcup_{n \in \mathbb{N}} A_n = \bigcup_{n \in \mathbb{N}} \bigcup_{k \in B_n} U_k = \bigcup_{k \in B_0 \cup B_1 \cup \dotsc} U_k
+    \end{equation*}
+    is a countable union of sets $U_k$, and therefore an element of $\mathscr{U}$.
+
+  \item We have $\mathbb{N} = \cup_{n \in \mathbb{N}} \,\{ n \} \subset \cup_{n \in \mathbb{N}} \,U_n$, and conversely
+    $\cup_{n \in \mathbb{N}} \,U_n \subset \mathbb{N}$, so $\mathbb{N} \in \mathscr{U}$.
+
+  \item Let $B \in \mathscr{U}$; there exists a subset $A$ of $\mathbb{N}$ such that $B = \cup_{n \in A} \,U_n$. Suppose that $x \notin B$,
+    then $x \notin U_n$ for all $n$ in $A$. But since $\{ U_n \}_{n \in \mathbb{N}}$ cover $\mathbb{N}$, we deduce that
+    $x \in \cup_{n \notin A} \,U_n$. And since $\mathbb{N}$ is countable, $A^c$ is countable, and this union ranges over a countable set.
+
+    Conversely, let $x \in \cup_{n \notin A} \,U_n$. There exists $n \in A^c$ such that $x \in U_n$. If there exists $m \in A$ such
+    that $x \in U_m$, then $x \in U_m \cap U_n$. The case $m = n$ implies that both $n \in A$ and $n \notin A$, a contradition.
+    And the case $m \neq n$ implies $U_m \cap U_n = \varnothing$ since the $U_k$ are pairwise disjoint; and this contradicts the
+    existence of $x$. Therefore $x \notin \cup_{k \in A} \,U_k = B$, and $B^c = \cup_{x \notin A} \,U_k \in \mathscr{U}$.
+
+  \end{itemize}
+
+  Let $A \in \mathscr{A}$, we have $A = \cup_{n \in A} \,\{ n \} \subset \cup_{n \in A} \,U_n \in \mathscr{U}$,
+  from which we deduce that $\mathscr{A} \subset \mathscr{U}$. Conversely, if $x \in \cup_{n \in A} \,U_n$,
+  then there exists $m \in A$ such that $x \in U_m$. Thus $C_x = C_m$ and $x \in A$.
+  Combining both results we conclude that $\mathscr{A} = \mathscr{U}$.
+
+\end{proof}
+
+\end{document}
