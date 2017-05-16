@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[subsection]
+
+\setcounter{section}{3}
+\setcounter{subsection}{4}
+\setcounter{proposition}{2}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that Proposition 3.4.3 would be false if $p$ were allowed to be infinite. (Hint: construct a
+  Borel subset $A$ of $[ a, b ]$ such that $\left\| \chi_A - f \right\|_\infty \geq 1 / 2$ holds whenever
+  $f$ is a step function.)
+
+\end{exercise}
+
+\begin{proposition}
+
+  Suppose that $[ a, b ]$ is a closed bounded interval and that $p$ satisfies $1 \leq p < +\infty$.
+  Then the subspace of $L^p ( [ a, b ])$ determined by the step functions on $[ a, b ]$ is dense in $L^p ( [ a, b ] )$.
+
+\end{proposition}
+
+\begin{proof}
+
+  Let $0 < \alpha < 1$, there exists a Borel subset $A$ of $[ a, b ]$ such that:
+  \begin{itemize}
+  \item $\lambda \left( A \right) = \alpha \cdot ( b - a )$
+  \item $A$ does not contain any nonempty closed interval
+  \end{itemize}
+  Let $f \in \mathscr{L}^\infty ( [ a, b ] )$ be a step function
+  \begin{equation*}
+    f = \sum_{i = 0}^n b_i \chi_{[ a_i, a_{i + 1} ]}
+  \end{equation*}
+  with $a = a_0 < \dotsb < a_n = b$ real numbers in $[ a, b ]$ and $b_i$ complex numbers for all $i$.
+  Suppose that $\left\| \chi_A - f \right\|_\infty < \alpha / 3$. For all $0 \leq i \leq n$,
+  there exists $x_0 \in [ a_i, a_{i + 1} ]$ such that $x_0 \notin A$, since $A$ does not contain any nonempty closed interval.
+  From this we deduce that $\alpha / 3 > \left\| \chi_A - f \right\|_\infty \geq | b_i |$ for all $i$.
+  Both $f$ and $\chi_A$ are integrable on $[ a, b ]$ and we have
+  \begin{align*}
+    \int_{[ a, b ]} \chi_A \,\mathrm{d}\lambda &\leq \int_{[ a, b ]} | \chi_A - f | \,\mathrm{d}\lambda + \int_{[ a, b ]} | f | \,\mathrm{d}\lambda \\
+    \alpha \cdot ( b - a )&\leq ( b - a ) \frac{\alpha}{3} + \sum_{i = 0}^n | b_i | \cdot ( a_{i + 1} - a_i ) \\
+    &\leq 2 ( b - a ) \frac{\alpha}{3}
+  \end{align*}
+  from which we deduce that $\alpha \leq 2 \alpha / 3$, which is a contradiction.
+  Therefore no step function can approach $\chi_A$ arbitrarily, so that the subspace of $L^\infty ( [ a, b ] )$ determined by the step functions
+  is not dense in $L^\infty ( [ a, b ] )$.
+
+  ~\\
+  Let us show the existence of a set $A$ with the expected properties. Since the Lebesgue measure is invariant by translation,
+  it is enough to show the existence of such a set in the interval $[ 0, b - a ]$. Given a Borel set $B$ and some real number $x > 0$,
+  $x \cdot B$ is also a Borel set, so we can further reduce the interval to $[ 0, 1 ]$.
+
+  ~\\
+  Let $\beta$ be a real such that $0 < \beta < 1$, and let $\sum_k u_k$ be a series of positive real numbers such that $\sum_{k = 0}^\infty u_k = 1 - \beta$.
+  Let $( A_n )_{n \in \mathbb{N}}$ be a sequence of closed sets defined recursively by $A_0 = [ 0, 1 ]$, and, for each $n$,
+  $A_{n + 1}$ be the union of $2^{n + 1}$ closed intervals $I_n$ obtained by removing from each of the $2^n$ closed intervals $I_n$ composing $A_n$
+  an open interval of length $u_n / 2^n$ centered on $I_n$.
+
+  For all $n$, $A_n$ is closed and measurable, and $\lambda ( A_{n + 1} ) = 1 - ( u_0 + u_1 + \dotsc + u_n )$.
+  Moreover, $A_{n + 1} \subset A_n$, and $\lambda ( A_0 ) = 1$ is finite, so
+  \begin{equation*}
+    \lambda \left( \bigcap_{n = 0}^\infty A_n \right) = \lim_{n \to \infty} \lambda ( A_n ) = 1 - \lim_{n \to \infty} \sum_{k = 0}^n u_k = \beta
+  \end{equation*}
+
+  Let $A = \cap_{n \in \mathbb{N}} A_n$. $A$ is measurable, has measure $\beta$, and does not include any nonempty closed interval:
+  suppose that $[ a, b ] \subset A$, then $[ a, b ] \subset A_n$ for all $n$. Since $A_n$ is the union of $2^n$
+  disjoint intervals $I_n$, each of measure $( 1 - u_0 - \dotsb - u_n ) / 2^n$, we have
+  \begin{equation*}
+    0 \leq \lambda ( [ a, b ] ) \leq \frac{1}{2^n} \left( 1 - \sum_{k = 0}^n u_k \right)
+  \end{equation*}
+  And since the series $\sum_k u_k$ of positive reals converges, we deduce that $\lambda ( [ a, b ] ) = 0$,
+  so that $[ a, b ] = \varnothing$.
+
+\end{proof}
+
+\end{document}
