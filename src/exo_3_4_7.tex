@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{example}{Example}[subsection]
+
+\setcounter{section}{3}
+\setcounter{subsection}{4}
+\setcounter{lemma}{6}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that in Lemma 3.4.7 condition \ref{it:union} cannot be replaced with the assumption that
+  $\mu$ is $\sigma$-finite. (\emph{Hint:} Let $\mathscr{A}_0$ be the algebra on $\mathbb{R}$
+  defined in example 1.1.1(g) let $\{ r_n \}$ be an enumeration of $\mathbb{Q}$, and let $\mu$
+  be the Borel measure on $\mathbb{R}$ defined by $\mu = \sum_n \delta_{r_n}$.)
+
+\end{exercise}
+
+\bigskip
+\begin{lemma}
+
+  Let $(X, \mathscr{A}, \mu)$ be a measure space. Suppose that $\mathscr{A}_0$ is an algebra of
+  subsets of $X$ such that
+  \begin{enumerate}[(a)]
+
+  \item $\sigma ( \mathscr{A}_0 ) = \mathscr{A}$, and
+
+  \item \label{it:union} $X$ is the union of a sequence of sets that belong to $\mathscr{A}_0$ and have finite measure under $\mu$.
+
+  \end{enumerate}
+  Then for each positive $\varepsilon$ and each set $A$ that belongs to $\mathscr{A}$ and satisfies $\mu ( A ) < +\infty$
+  there is a set $A_0$ that belongs to $\mathscr{A}_0$ and satisfies $\mu ( A \bigtriangleup A_0 ) < \varepsilon$.
+
+\end{lemma}
+
+\setcounter{section}{1}
+\setcounter{subsection}{1}
+\setcounter{example}{0}
+
+\bigskip
+\begin{example}
+
+\begin{enumerate}[(g)]
+
+\item Let $\mathscr{A}$ be the collection of all subsets of $\mathbb{R}$ that are unions of finitely many intervals
+  of the form $( a, b ]$, $( a, +\infty )$ or $( -\infty, b ]$. It is easy to check that each set that belongs to $\mathscr{A}$
+  is the union of a finite disjoint collection of intervals of the types listed above, and then to check that $\mathscr{A}$
+  is an algebra on $\mathbb{R}$ (the empty set belongs to $\mathscr{A}$, since it is the union of the empty, and hence finite,
+  collection of intervals). The algebra $\mathscr{A}$ is not a $\sigma$-algebra; for example the bounded open subintervals of $\mathbb{R}$
+  are unions of sequences of sets of $\mathscr{A}$ but do not themselves belong to $\mathscr{A}$.
+
+\end{enumerate}
+
+\end{example}
+
+\begin{proof}
+
+  For all $b \in \mathbb{R}$, $( -\infty, b ] \in \mathscr{A}$, so $\mathscr{B} ( \mathbb{R} ) \subset \sigma ( \mathscr{A} )$.
+  Moreover, $\mathbb{R} = \cup_{r \in \mathbb{Q}} \,\{ r \} \cup ( \mathbb{R} - \mathbb{Q} )$ is a countable union of sets of $\sigma ( \mathscr{A} )$
+  with finite measure: $\mu ( \{ r \} ) = 1$ for all $r \in \mathbb{Q}$, and $\mu ( \mathbb{R} - \mathbb{Q} ) = 0$. So $\mu$
+  is $\sigma$-finite on $\sigma ( \mathscr{A} )$.
+
+  Every nonempty $A \in \mathscr{A}$ is the finite union of intervals mentioned in the example, and therefore contains
+  a nonempty open interval. So there are infinitely many rational numbers in $A$, and $\mu ( A )$ is infinite.
+  From this we deduce that $\mathbb{R}$ is not the union of sets of $\mathscr{A}$ with finite measure, and so
+  hypothesis \ref{it:union} of the lemma does not hold.
+
+  Let $B = \{ \sqrt{2} \} \in \sigma ( \mathscr{A} )$, and $A \in \mathscr{A}$ such that $A$ is nonempty.
+  Then $A$ contains at least one rational number $r$, and since $r \notin B$, we have $r \in A \bigtriangleup B$.
+  Therefore $\mu ( A \bigtriangleup B ) \geq 1$, but $\mu ( \{ B \} ) = 0$, so the conclusion of the lemma does not hold
+  if $X$ is only $\sigma$-finite.
+
+\end{proof}
+
+\end{document}
