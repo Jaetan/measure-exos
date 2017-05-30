@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $V$ be an inner product space, and for each $y$ in $V$ define $F_y : V \to \mathbb{R}$ by
+  $F_y ( x ) = ( x, y )$.
+  \begin{enumerate}[(a)]
+
+  \item Show that $F_y$ belongs to $V^*$ and satisfies $\| F_y \| = \| y \|$. (Hint: use the Cauchy-Schwarz
+    inequality; see exercise 3.2.7. To check that $\| F_y \|$ is equal to (rather than less than) $\| y \|$,
+    consider $F_y ( y )$.)
+
+  \item Show that if $y \neq y'$, then $F_y \neq F_{y'}$.
+
+  \item Show that if the inner product space $V$ is a Hilbert space and if $F$ belongs to $V^*$, then there is
+    an element $y$ of $V$ such that $F = F_y$. (Hint: let $y = 0$ if $F = 0$. Otherwise choose a nonzero element
+    $v$ of $V$ such that $( u, v ) = 0$ holds whenever $F ( u ) = 0$ (see exercise 3.2.12), and check that
+    a suitable multiple of $v$ works.)
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $K$ be $\mathbb{R}$ or $\mathbb{C}$, the field on which $V$ is defined, and let $y \in V$.
+    For all $x, z \in V$ and $\alpha \in K$, we have
+    \begin{align*}
+      F_y ( x + z ) &= ( y, x + z ) = ( y, x ) + ( y, z ) = F_y ( x ) + F_y ( z ) \\
+      F_y ( \alpha \cdot x ) &= ( y, \alpha \cdot x ) = \alpha \cdot ( y, x ) = \alpha \cdot F_y ( x )
+    \end{align*}
+    so that $F_y$ is linear; since the inner product is defined from $V \times V$ to $K$, $F_y ( x ) \in K$ for all $x \in V$.
+    Using Cauchy-Schwarz inequality, we get
+    \begin{equation*}
+      \left| F_y ( x ) \right| = \left| \left( y, x \right) \right| \leq \| y \| \cdot \| x \|
+    \end{equation*}
+    from which we deduce that $F_y$ is bounded. Therefore $F_y \in V^*$, and $\left\| F_y \right\| \leq \| y \|$.
+    Moreover, we have
+    \begin{equation*}
+      \left| F_y ( y ) \right| = | ( y, y ) | = \| y \|^2
+    \end{equation*}
+    so there exists an element $x \in V$ such that $| F_y ( x ) | = \| y \| \cdot \| x \|$. From this we deduce that
+    $\| F_y \| \geq \| y \|$, and, combining both inequalities, that $\| F_y \| = \| y \|$.
+
+  \item Let $y, y'$ be distinct elements of $V$. We have
+    \begin{align*}
+      | F_y ( y - y' ) - F_{y'} ( y - y' ) | &= | ( y, y - y' ) - ( y', y - y' ) | \\
+      &= | ( y - y', y - y' ) | = \| y - y' \|^2 > 0
+    \end{align*}
+    $F_y$ and $F_{y'}$ take different values on the vector $y - y'$, and are therefore different.
+
+  \item If $F = 0$, then $F = F_0$. Otherwise, there exists $w \in V$ such that $F ( w ) \neq 0$.
+
+    The set $k_F = \{ u \in V \mid F ( u ) = 0 \}$ is nonempty (it contains the null vector), and, by linearity of $F$,
+    is a K-vector space. As a Hilbert space, $V$ is complete, and hence closed; let $\{ u_n \}_{n \in \mathbb{N}}$ be
+    a sequence of elements of $k_F$ that converges to some $u \in V$. We have
+    \begin{align*}
+      | F ( u ) | &\leq | F ( u ) - F ( u_n ) | + | F ( u_n ) | \\
+      &\leq \| F \| \cdot \| u - u_n \|
+    \end{align*}
+    since $F ( u_n ) = 0$ and $F$ is continuous. From this we deduce that for all $\varepsilon > 0$,
+    $| F ( u ) | \leq \varepsilon$, so that $F ( u ) = 0$ and $u \in k_F$. $k_F$ is then a closed subspace of $V$.
+
+    From exercise 3.2.12, we deduce the existence of a vector $h \in k_F$ satisfying
+    $\| w - h \| = \inf \{ \| w - x \|, x \in k_F \}$, and such that $w - h$ is orthogonal to $k_F$. Note that
+    $F ( w - h ) = F ( w ) - F ( h ) = F ( w )$, so that $w - h \notin k_F$.
+
+    Let $v = \frac{w - h}{F ( w - h )}$, for all $x \in V$, we have
+    \begin{equation*}
+      F ( x ) = F ( x ) \cdot F ( v ) = F \big( F ( x ) \cdot v \big)
+    \end{equation*}
+    so that $x - F ( x ) \cdot v = z \in k_F$. Moreover,
+    \begin{align*}
+      ( x, v ) &= \big( F ( x ) \cdot v + z, v \big) = F ( x ) \cdot ( v, v ) + ( z, v ) \\
+      &= F ( x ) \cdot \| v \|^2
+    \end{align*}
+    since $v$ is orthogonal to $k_F$. From this we deduce that
+    \begin{equation*}
+      F = F_y \quad\text{with } y = \frac{v}{\| v \|^2}
+    \end{equation*}
+    
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}
