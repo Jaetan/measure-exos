@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $V$ be a normed linear space. Show that the dual $V^*$ of $V$ is complete under the norm $\| \cdot \|$
+  defined above. (Hint: Let $\{ F_n \}$ be a Cauchy sequence in $V^*$. Show that for each $v$ in $V$ the sequence
+  $\{ F_n ( v ) \}$ is a Cauchy sequence in $\mathbb{R}$ (or in $\mathbb{C}$) and so is convergent. Then show that
+  the formula $F ( v ) = \lim_n F_n ( v )$ defines a bounded linear functional on $V$ and that $\lim_n \| F_n - F \| = 0$.)
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $K$ ($K = \mathbb{R}$ or $K = \mathbb{C}$) be the field of scalars for $V$. Let $\varepsilon > 0$;
+  since the sequence $\{ F_n \}$ is a Cauchy sequence, we have
+  \begin{equation*}
+    \exists N \in \mathbb{N}, \quad \forall n, m \in \mathbb{N}, \quad n \geq N \land m \geq N \implies \| F_n - F_m \| < \varepsilon
+  \end{equation*}
+  where $\| \cdot \|$ is the norm of linear functionals on $V$. Let $v \in V$, we have
+  \begin{equation}\label{ineq:cauchy_v}
+    | F_n ( v ) - F_m ( v ) | = | ( F_n - F_m ) ( v ) | \leq \| F_n - F_m \| \cdot \| v \| < \| v \| \cdot \varepsilon
+  \end{equation}
+  for all $n, m \in \mathbb{N}$ such that $n \geq N$ and $m \geq N$. From this we deduce that the sequence $\{ F_n ( v ) \}$ is
+  a Cauchy sequence of elements of $K$. Since $K$ is complete, $\{ F_n ( v ) \}$ converges to some scalar in $K$.
+  Let
+  \begin{align*}
+    F : V &\to K \\
+    v &\mapsto \lim_n F_n ( v )
+  \end{align*}
+  For all $u, v \in V$ and all $\alpha \in K$ we have
+  \begin{align*}
+    F ( u + v ) &= \lim_n F_n ( u + v ) = \lim_n \big( F_n ( u ) + F_n ( v ) \big) \\
+    &= \lim_n F_n ( u ) + \lim_n F_n ( v ) = F ( u ) + F ( v ) \\
+    F ( \alpha \cdot u ) &= \lim_n F_n ( \alpha \cdot u ) = \lim_n \big( \alpha \cdot F_n ( u ) \big) \\
+    &= \alpha \cdot \lim_n F_n ( u ) = \alpha \cdot F ( u )
+  \end{align*}
+  so that $F$ is linear.
+
+  Let $B_1 = \{ v \in V \mid \| v \| \leq 1 \}$ and $v \in B_1$.
+  For all nonzero $v \in V$ and all $\varphi \in V^*$, we have $\varphi ( \frac{v}{\| v \|} ) = \frac{1}{\| v \|} \varphi ( v )$, so that
+  \begin{align*}
+    \| \varphi \| &= \inf \{ M \in \mathbb{R} \mid \forall v \in V, | \varphi ( v ) | \leq M \cdot \| v \| \} \\
+    &= \inf \{ M \in \mathbb{R} \mid \forall v \in B_1, | \varphi ( v ) | \leq M \}
+  \end{align*}
+
+  The convergence of $\{ F_n ( v ) \}$ to $F ( v )$ implies the existence of $n_0 \in \mathbb{N}$ such that $| F_{n_0} ( v ) - F ( v ) | < 1$. \
+  From this we get
+  \begin{equation*}
+    | F ( v ) | \leq | F ( v ) - F_{n_0} ( v ) | + | F_{n_0} ( v ) | \leq 1 + \| F_{n_0} \| \cdot \| v \| \leq 1 + \| F_{n_0} \|
+  \end{equation*}
+  so that $F$ is bounded, and therefore continuous.
+
+  Let $v \in B_1$ and $n \in \mathbb{N}$ such that $n \geq N$. For all $m \in \mathbb{N}$, we have by \eqref{ineq:cauchy_v}
+  \begin{align*}
+    | F_n ( v ) - F ( v ) | &\leq | F_n ( v ) - F_{n + m} ( v ) | + | F_{n + m} ( v ) - F ( v ) | \\
+    &\leq \varepsilon \cdot \| v \| + \varepsilon \leq 2 \varepsilon
+  \end{align*}
+  as soon as $m \geq M$ depending only on $v$. Therefore
+  \begin{equation*}
+    \forall v \in B_1, \quad \forall n \in \mathbb{N}, \quad | ( F_n - F ) ( v ) | \leq 2 \varepsilon
+  \end{equation*}
+  which implies $\| F_n - F \| \leq 2 \varepsilon$. Thus $\lim_n \| F_n - F \| = 0$, and $V^*$ is complete for the
+  norm of linear functionals.
+
+\end{proof}
+
+\end{document}
