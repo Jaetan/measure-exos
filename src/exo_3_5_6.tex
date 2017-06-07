@@ -65,12 +65,12 @@
   \end{equation*}
   so that $F$ is bounded, and therefore continuous.
 
-  Let $v \in B_1$ and $n \in \mathbb{N}$ such that $n \geq N$. For all $m \in \mathbb{N}$, we have by \eqref{ineq:cauchy_v}
+  Let $v \in B_1$ and $n \in \mathbb{N}$ such that $n \geq N$. For all $m \in \mathbb{N}$ such that $m \geq M$, we have by \eqref{ineq:cauchy_v}
   \begin{align*}
-    | F_n ( v ) - F ( v ) | &\leq | F_n ( v ) - F_{n + m} ( v ) | + | F_{n + m} ( v ) - F ( v ) | \\
+    | F_n ( v ) - F ( v ) | &\leq | F_n ( v ) - F_m ( v ) | + | F_m ( v ) - F ( v ) | \\
     &\leq \varepsilon \cdot \| v \| + \varepsilon \leq 2 \varepsilon
   \end{align*}
-  as soon as $m \geq M$ depending only on $v$. Therefore
+  where $M$ depends only on $v$. Therefore
   \begin{equation*}
     \forall v \in B_1, \quad \forall n \in \mathbb{N}, \quad | ( F_n - F ) ( v ) | \leq 2 \varepsilon
   \end{equation*}
