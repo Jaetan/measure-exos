@@ -1,0 +1,137 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+
+\begin{exercise}
+
+  (This exercise depends on the Hahn-Banach theorem, which is stated without proof
+  in appendix E.) Let $V$ be the subspace of $\ell^\infty$ consisting of those
+  sequences $\{ x_n \}$ for which $\lim_n x_n$ exists, and let $F_0\colon V\to\mathbb{R}$
+  be defined by $F_0(\{x_n\})=\lim_n x_n$.
+  \begin{enumerate}[(a)]
+
+    \item Show that $F_0$ is a bounded linear functional on $V$ and that $\| F_0 \| = 1$.
+
+    \item Let $F$ be a linear functional on $\ell^\infty$ that satisfies $\| F \| = 1$ and
+      agrees with $F_0$ on $V$ (see Theorem E.7). Show that if $\{ x_n \}$ is a nonnegative
+      element of $\ell^\infty$ (that is, if $\{ x_n \}$ belongs to $\ell^\infty$
+      and satisfies $x_n \geq 0$ for each $n$), then $F ( \{ x_n \} ) \geq 0$. (Hint: consider
+      the sequence $\{ x'_n \}$ defined by $x'_n = x_n - c$, where $c$ is a suitably chosen constant.)
+
+    \item For each subset $A$ of $\mathbb{N}$ let $\{ \chi_{A, n} \}_{n = 1}^\infty$ be the sequence
+      defined by
+      \begin{equation*}
+        \chi_{A, n} = \begin{cases}
+          1 &\text{if } n \in A \\
+          0 &\text{if } n \notin A
+        \end{cases}
+      \end{equation*}
+      Show that the function $\mu \colon \mathscr{P} \to \mathbb{R}$ defined by $\mu ( A ) = F ( \{ X_{A, n} \} )$
+      is a finitely additive measure, but is not countably additive.
+
+  \end{enumerate}
+
+\end{exercise}
+
+For reference, theorem E.7 is:
+\bigskip
+\begin{theorem}[Hahn-Banach]
+  Let $E$ be a normed real or complex linear space, let $F$ be a linear subspace of $E$, and let $\varphi_0$ be
+  a continuous linear functional on $F$. Then there is a continuous linear funcional $\varphi$ on $E$ such that
+  $\| \varphi \| = \| \varphi_0 \|$ and such that $\varphi_0$ is the restriction of $\varphi$ to $F$. In other words,
+  $\varphi_0$ can be extended to a continuous linear functional on all of $E$ without increasing its norm.
+\end{theorem}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item The linearity of $F_0$ is an immediate consequence of the linearity of limits. Moreover, for all $\{ x_n \} \in V$,
+    $\left\{ \left| x_n \right| \right\}$ converges since $\{ x_n \}$ converges, and
+    \begin{align*}
+      \forall n \in \mathbb{N}, \quad x_n &\leq \left| x_n \right| \\
+      \lim_{n \to \infty} x_n &\leq \lim_{n \to \infty} \left| x_n \right| \\
+      \left| \lim_{n \to \infty} x_n \right| &\leq \lim_{n \to \infty} \left| x_n \right| \\
+      \left| F_0 \left( \left\{ x_n \right\} \right) \right| &\leq \sup \left\{ \left| x_n \right|, n \in \mathbb{N} \right\} = \left\| x_n \right\|_\infty
+    \end{align*}
+    so that $F_0$ is bounded and $\left\| F_0 \right\| \leq 1$. Since we also have
+    \begin{align*}
+      \left| F_0 \left( \left\{ 1, 1, \dotsc \right\} \right) \right| = 1 = \left\| \left\{ 1, 1, \dotsc \right\} \right\|_\infty
+    \end{align*}
+    we deduce that $\left\| F_0 \right\| = 1$.
+
+  \item First suppose that for all $n \in \mathbb{N}$, $0 \leq x_n \leq 1$, $\inf_{n \in \mathbb{N}} = 0$
+    and $\| x_n \|_\infty = 1$. Then we have
+    \begin{equation*}
+      \left\| x_n - \frac{1}{2} \right\|_\infty = \frac{1}{2}
+    \end{equation*}
+    From the linearity of $F$ and the fact that $\| F \| = 1$, we deduce
+    \begin{align*}
+      \left\| x_n - \frac{1}{2} \right\|_\infty &\geq \left| F \left( \left\{ x_n - \frac{1}{2} \right\} \right) \right| \\
+      \frac{1}{2} &\geq \left| F \left( \{ x_n \} \right) - F \left( \left\{ \frac{1}{2} \right\}_{n \in \mathbb{N}} \right) \right| \\
+      \frac{1}{2} &\geq \left| F \left( \{ x_n \} \right) - \frac{1}{2} \right| \\
+      - \frac{1}{2} &\leq F \left( \{ x_n \} \right) - \frac{1}{2} \leq \frac{1}{2}
+    \end{align*}
+    which in turn gives us
+    \begin{equation}\label{ineq:F_nonnegative}
+      F \left( \{ x_n \} \right) \geq 0
+    \end{equation}
+
+    Suppose now that $\{ x_n \} \in \ell^\infty$ is such that $0 \leq x_n$ for all $n \in \mathbb{N}$, and let $c = \inf_{n \in \mathbb{N}} \{ x_n \} \geq 0$.
+    If $\| x_n - c \|_\infty = 0$, then for all $n \in \mathbb{N}$, $x_n = c$, in which case $F ( \{ x_n \} ) = F ( \{ c \}_{n \in \mathbb{N}} ) = c \geq 0$.
+    Otherwise, $\| x_n - c \|_\infty > 0$, and the sequence defined by
+    \begin{equation*}
+      \forall n \in \mathbb{N}, \quad y_n = \frac{x_n - c}{\| x_n - c \|_\infty}
+    \end{equation*}
+    satisfies $y_n \geq 0$ for all $n \in \mathbb{N}$, $\inf_{n \in \mathbb{N}} \{ y_n \} = 0$ and $\| y_n \|_\infty = 1$.
+    We can then apply \eqref{ineq:F_nonnegative} to deduce that
+    \begin{align*}
+      F ( \{ y_n \} ) &\geq 0 \\
+      F \left( \frac{x_n - c}{\| x_n - c \|_\infty} \right) &\geq 0 \\
+      \frac{1}{\| x_n - c \|_\infty} \left( F \left( \{ x_n \} \right) - c \right) &\geq 0 \\
+      F \left( \{ x_n \} \right) &\geq c \geq 0
+    \end{align*}
+
+  \item $\mathscr{P} ( \mathbb{N} )$ is a $\sigma$-algebra on $\mathbb{N}$; for all $A \subset \mathbb{N}$, the sequence
+    $\{ \chi_{A, n} \}$ is nonnegative and bounded. From the preceding points, we deduce that
+    \begin{align*}
+      \mu ( A ) &= F ( \{ \chi_{A, n} \} ) \geq 0 \\
+      \mu ( \varnothing ) &= F ( \{ 0 \}_{n \in \mathbb{N}} ) = 0
+    \end{align*}
+
+    Let $A, B$ be disjoint subsets of $\mathbb{N}$. We have $\chi_{A \cup B, n} = \chi_{A, n} + \chi_{B, n}$, and, from the lineairy of $F$,
+    \begin{align*}
+      \mu ( A \cup B ) &= F ( \{ \chi_{A \cup B, n} \} ) = F ( \{ \chi_{A, n} \} + \{ \chi_{B, n} \}) \\
+      &= F ( \{ \chi_{A, n} \} ) + F ( \{ \chi_{B, n} \} ) = \mu ( A ) + \mu ( B )
+    \end{align*}
+    so that $\mu$ is a finitely additive measure.
+
+    Let $A = \mathbb{N}$ and $A_n = \{ n \}$ for all $n \in \mathbb{N}$. The $A_n$ are pairwise disjoint and
+    $A = \cup_{n \in \mathbb{N}} A_n$. However,
+    \begin{align*}
+      \mu ( A ) &= \mu ( \mathbb{N} ) = F ( \{ 1 \}_{n \in \mathbb{N}} ) = 1 \\
+      \forall n \in \mathbb{N}, \quad \mu ( A_n ) &= F ( \{ 0, 0, \dotsc, n, 0, \dotsc \} ) = 0
+    \end{align*}
+    so that $\mu ( A ) \neq \sum_{n = 0}^\infty \mu ( A_n )$, and $\mu$ is not countably additive.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}
